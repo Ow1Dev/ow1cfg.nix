@@ -39,9 +39,11 @@
 
         overlays = import ./overlays {inherit inputs;};
       };
+
       systems = [
         "x86_64-linux"
       ];
+
       perSystem = {pkgs, ...}: let
         inherit (pkgs) alejandra just nixos-rebuild mkShell;
       in {
