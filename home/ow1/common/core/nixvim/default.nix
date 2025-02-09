@@ -8,6 +8,7 @@
     ./lsp.nix
     ./ui.nix
     ./greeting.nix
+    ./neogit.nix
     ./window.nix
     ./cmp.nix
   ];
