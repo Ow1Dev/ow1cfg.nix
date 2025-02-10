@@ -38,7 +38,7 @@ in
       "$HOME/scripts/talon_scripts"
     ];
     sessionVariables = {
-      FLAKE = "$HOME/src/nix/nix-config";
+      FLAKE = "$HOME/ow1dev.nix";
       SHELL = "zsh";
       TERM = "kitty";
       TERMINAL = "kitty";

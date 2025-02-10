@@ -248,12 +248,6 @@
       }
     ];
 
-    plugins.lsp.keymaps.lspBuf = {
-      "K" = "hover";
-      "<Leader>gD" = "references";
-      "<Leader>gd" = "definition";
-    };
-
     plugins.which-key = {
       settings.spec = [
         {
