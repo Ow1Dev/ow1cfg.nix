@@ -81,6 +81,7 @@ in
     unrar # rar extraction
     wget # downloader
     zip # zip compression
+    fzf
     cbonsai
   ];
 
