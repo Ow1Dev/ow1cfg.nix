@@ -4,7 +4,6 @@
     ./plugins
     ./keymaps.nix
     ./ui.nix
-    ./neogit.nix
     ./window.nix
   ];
 

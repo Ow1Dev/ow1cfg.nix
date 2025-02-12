@@ -15,6 +15,11 @@
     nixvim-config.plugins.cmp.enable = lib.mkDefault true;
 
     #
+    # ========== Git ==========
+    #
+    nixvim-config.plugins.neogit.enable = lib.mkDefault true;
+
+    #
     # ========== lsp ==========
     #
     nixvim-config.plugins.fidget.enable = lib.mkDefault true;
