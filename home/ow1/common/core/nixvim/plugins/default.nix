@@ -7,6 +7,10 @@
     # ========== ui ==========
     #
     nixvim-config.plugins.alpha.enable = lib.mkDefault true;
+    nixvim-config.plugins.colorizer.enable = lib.mkDefault true;
+    nixvim-config.plugins.illuminate.enable = lib.mkDefault true;
+    nixvim-config.plugins.indent-blankline.enable = lib.mkDefault true;
+    nixvim-config.plugins.web-devicons.enable = lib.mkDefault true;
 
 		#
     # ========== bars/lines ==========
@@ -18,11 +22,18 @@
     # ========== completion ==========
     #
     nixvim-config.plugins.cmp.enable = lib.mkDefault true;
+    nixvim-config.plugins.nvim-autopairs.enable = lib.mkDefault true;
+
+		#
+    # ========== languages ==========
+    #
+    nixvim-config.plugins.treesitter.enable = lib.mkDefault true;
 
     #
     # ========== Git ==========
     #
     nixvim-config.plugins.neogit.enable = lib.mkDefault true;
+    nixvim-config.plugins.gitsigns.enable = lib.mkDefault true;
 
     #
     # ========== Tree ==========
@@ -36,10 +47,16 @@
     nixvim-config.plugins.lspconfig.enable = lib.mkDefault true;
 
 		#
+    # ========== search ==========
+    #
+    nixvim-config.plugins.telescope.enable = lib.mkDefault true;
+
+		#
     # ========== utils ==========
     #
 		nixvim-config.plugins.which-key.enable = lib.mkDefault true;
 		nixvim-config.plugins.toggleterm.enable = lib.mkDefault true;
     nixvim-config.plugins.tmux-navigator.enable = lib.mkDefault true;
+    nixvim-config.plugins.wrapping.enable = lib.mkDefault true;
   };
 }
