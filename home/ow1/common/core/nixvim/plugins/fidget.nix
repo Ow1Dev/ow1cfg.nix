@@ -1,4 +1,3 @@
-# LSP Progress Indicator
 { config, lib, ... }:
 {
   options = {

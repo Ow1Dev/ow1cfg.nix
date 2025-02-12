@@ -72,23 +72,6 @@
         };
       }
 
-      # Terminal
-      {
-        key = "<C-x>";
-        action = "<C-\\><C-N>";
-        mode = "t";
-        options.desc = "Exit terminal";
-      }
-
-      {
-        key = "<Leader>fw";
-        action = "<cmd> ToggleTerm direction=float <CR>";
-        mode = "n";
-        options = {
-          silent = true;
-          desc = "Floating terminal";
-        };
-      }
 
       # Git
       {
@@ -209,11 +192,6 @@
         {
           __unkeyed-1 = "<Leader>gd";
           desc = "Goto definition";
-        }
-
-        {
-          __unkeyed-1 = "<Leader>d";
-          desc = "DAP options";
         }
 
         {
