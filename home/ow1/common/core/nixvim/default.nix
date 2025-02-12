@@ -18,10 +18,37 @@
     globals.mapleader = " ";
 
     opts = {
-      tabstop = 2; # insert 2 spaces for a tab
-      softtabstop = 2;
-      shiftwidth = 2;
-      showbreak = "󰘍 ";
+        showbreak = "󰘍 ";
+        relativenumber = true; # show relative linenumbers
+        laststatus = 0; # Display status line always
+
+        wrap = false; # Don't wrap lines
+
+			# ================ Indentation ======================
+      autoindent = true;
+      cindent = true; # automatically indent braces
+      smartindent = true;
+      smarttab = true;
+      shiftwidth = 4;
+      softtabstop = 4;
+      tabstop = 4;
+      expandtab = true;
+
+			# ================ Scrolling ========================
+      scrolloff = 4; # Start scrolling when we're 4 lines away from margins
+      sidescrolloff = 15;
+      sidescroll = 1;
+
+			
+      # ================ Search and Replace ========================
+      incsearch = true; # searches incrementally as you type instead of after 'enter'
+      hlsearch = true; # highlight search results
+      ignorecase = true; # search case insensitive
+      smartcase = true; # search matters if capital letter
+      inccommand = "split"; # preview incremental substitutions in a split
+
+			# ================ Movement ========================
+			backspace = "indent,eol,start"; # allow backspace in insert mode
     };
 
     colorschemes.catppuccin = {

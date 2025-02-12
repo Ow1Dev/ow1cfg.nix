@@ -2,7 +2,7 @@
   programs.nixvim = {
     keymaps = [
       {
-        key = "<esc>";
+        key = "<leader>h";
         action = ":noh<CR>";
         mode = "n";
         options = {
@@ -72,94 +72,6 @@
         };
       }
 
-
-      # Git
-      {
-        key = "<Leader>gsr";
-        action = ":Gitsigns reset_hunk <CR>";
-        mode = "n";
-        options.desc = "Reset hunk";
-      }
-
-      {
-        key = "<Leader>gsh";
-        action = ":Gitsigns stage_hunk <CR>";
-        mode = "n";
-        options.desc = "Stage hunk";
-      }
-
-      {
-        key = "<Leader>gsu";
-        action = ":Gitsigns undo_stage_hunk <CR>";
-        mode = "n";
-        options.desc = "Undo stage hunk";
-      }
-
-      {
-        key = "<Leader>gh";
-        action = ":Gitsigns preview_hunk <CR>";
-        mode = "n";
-        options.desc = "Preview hunk";
-      }
-
-      {
-        key = "<Leader>gb";
-        action = ":Gitsigns blame_line<CR>";
-        mode = "n";
-        options.desc = "Git blame";
-      }
-
-      # Tree
-      {
-        key = "<Leader>e";
-        action = "<cmd> NvimTreeFocus <CR>";
-        mode = "n";
-        options.desc = "Focus tree";
-      }
-
-      {
-        key = "<C-n>";
-        action = "<cmd> NvimTreeToggle <CR>";
-        mode = "n";
-        options.desc = "Toggle tree";
-      }
-
-      # Telescope stuff
-      {
-        key = "<Leader>ff";
-        action = "<cmd> Telescope fd <CR>";
-        mode = "n";
-        options.desc = "Find files";
-      }
-
-      {
-        key = "<Leader>gsc";
-        action = "<cmd> Telescope git_commits <CR>";
-        mode = "n";
-        options.desc = "Git show commits";
-      }
-
-      {
-        key = "<Leader>fr";
-        action = "<cmd> Telescope oldfiles <CR>";
-        mode = "n";
-        options.desc = "Find recents";
-      }
-
-      {
-        key = "<Leader>fg";
-        action = "<cmd> Telescope live_grep <CR>";
-        mode = "n";
-        options.desc = "Telescope live grep";
-      }
-
-      {
-        key = "<Leader>tn";
-        action = "<cmd> Telescope notify <CR>";
-        mode = "n";
-        options.desc = "Recent notifications";
-      }
-
       {
         key = "<Leader>te";
         action = "<cmd> TodoQuickFix <CR>";
@@ -172,13 +84,6 @@
         action = "<cmd> TodoTelescope <CR>";
         mode = "n";
         options.desc = "TODO telescope";
-      }
-
-      {
-        key = "<Leader>tw";
-        action = "<cmd> ToggleWrapMode <CR>";
-        mode = "n";
-        options.desc = "Toggle wrap mode";
       }
     ];
 
