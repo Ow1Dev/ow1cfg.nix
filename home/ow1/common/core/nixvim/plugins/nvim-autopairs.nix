@@ -6,7 +6,7 @@
 
   config = lib.mkIf config.nixvim-config.plugins.nvim-autopairs.enable {
     programs.nixvim.plugins = {
-			nvim-autopairs.enable = true;
+      nvim-autopairs.enable = true;
     };
   };
 }

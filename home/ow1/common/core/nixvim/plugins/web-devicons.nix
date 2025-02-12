@@ -6,7 +6,7 @@
 
   config = lib.mkIf config.nixvim-config.plugins.web-devicons.enable {
     programs.nixvim.plugins = {
-			web-devicons.enable = true;
+      web-devicons.enable = true;
     };
   };
 }

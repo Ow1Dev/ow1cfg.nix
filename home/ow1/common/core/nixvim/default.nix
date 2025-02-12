@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./plugins
@@ -18,13 +19,13 @@
     globals.mapleader = " ";
 
     opts = {
-        showbreak = "󰘍 ";
-        relativenumber = true; # show relative linenumbers
-        laststatus = 0; # Display status line always
+      showbreak = "󰘍 ";
+      relativenumber = true; # show relative linenumbers
+      laststatus = 0; # Display status line always
 
-        wrap = false; # Don't wrap lines
+      wrap = false; # Don't wrap lines
 
-			# ================ Indentation ======================
+      # ================ Indentation ======================
       autoindent = true;
       cindent = true; # automatically indent braces
       smartindent = true;
@@ -34,12 +35,11 @@
       tabstop = 4;
       expandtab = true;
 
-			# ================ Scrolling ========================
+      # ================ Scrolling ========================
       scrolloff = 4; # Start scrolling when we're 4 lines away from margins
       sidescrolloff = 15;
       sidescroll = 1;
 
-			
       # ================ Search and Replace ========================
       incsearch = true; # searches incrementally as you type instead of after 'enter'
       hlsearch = true; # highlight search results
@@ -47,8 +47,8 @@
       smartcase = true; # search matters if capital letter
       inccommand = "split"; # preview incremental substitutions in a split
 
-			# ================ Movement ========================
-			backspace = "indent,eol,start"; # allow backspace in insert mode
+      # ================ Movement ========================
+      backspace = "indent,eol,start"; # allow backspace in insert mode
     };
 
     colorschemes.catppuccin = {

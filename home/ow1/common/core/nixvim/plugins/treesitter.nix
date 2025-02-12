@@ -6,10 +6,10 @@
 
   config = lib.mkIf config.nixvim-config.plugins.treesitter.enable {
     programs.nixvim.plugins = {
-			treesitter = {
-				enable = true;
-				settings.indent.enable = true;
-			};
+      treesitter = {
+        enable = true;
+        settings.indent.enable = true;
+      };
     };
   };
 }

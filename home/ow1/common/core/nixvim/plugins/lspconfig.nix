@@ -92,9 +92,9 @@ in
             pyright = {
               enable = true;
             };
-						gopls = {
-							enable = true;
-						};
+            gopls = {
+              enable = true;
+            };
           };
           keymaps = {
             silent = true;

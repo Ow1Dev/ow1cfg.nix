@@ -6,7 +6,7 @@
 
   config = lib.mkIf config.nixvim-config.plugins.wrapping.enable {
     programs.nixvim.plugins = {
-			wrapping.enable = true;
+      wrapping.enable = true;
     };
   };
 }

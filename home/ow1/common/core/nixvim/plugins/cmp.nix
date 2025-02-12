@@ -1,10 +1,11 @@
-{ config
-, lib
-, ...
-}: {
+{
+  config,
+  lib,
+  ...
+}:
+{
   options = {
-    nixvim-config.plugins.cmp.enable =
-      lib.mkEnableOption "enables cmp and lspkind modules";
+    nixvim-config.plugins.cmp.enable = lib.mkEnableOption "enables cmp and lspkind modules";
   };
 
   config = lib.mkIf config.nixvim-config.plugins.cmp.enable {
@@ -19,7 +20,9 @@
               border = "rounded";
               scrollbar = false;
             };
-            documentation = { border = "rounded"; };
+            documentation = {
+              border = "rounded";
+            };
             snippet.expand =
               # lua
               ''
@@ -66,7 +69,9 @@
       cmp_luasnip.enable = true;
       cmp-nvim-lsp-signature-help.enable = true;
 
-      luasnip = { enable = true; };
+      luasnip = {
+        enable = true;
+      };
     };
   };
 }

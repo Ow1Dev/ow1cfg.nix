@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = lib.custom.scanPaths ./.;
 
   #   config = lib.mkIf config.nixvim-config.enable {  # don't want to gif on options one level out of here yet
@@ -12,10 +13,10 @@
     nixvim-config.plugins.indent-blankline.enable = lib.mkDefault true;
     nixvim-config.plugins.web-devicons.enable = lib.mkDefault true;
 
-		#
+    #
     # ========== bars/lines ==========
     #
-		nixvim-config.plugins.bufferline.enable = lib.mkDefault true;
+    nixvim-config.plugins.bufferline.enable = lib.mkDefault true;
     nixvim-config.plugins.lualine.enable = lib.mkDefault true;
 
     #
@@ -24,7 +25,7 @@
     nixvim-config.plugins.cmp.enable = lib.mkDefault true;
     nixvim-config.plugins.nvim-autopairs.enable = lib.mkDefault true;
 
-		#
+    #
     # ========== languages ==========
     #
     nixvim-config.plugins.treesitter.enable = lib.mkDefault true;
@@ -46,16 +47,16 @@
     nixvim-config.plugins.fidget.enable = lib.mkDefault true;
     nixvim-config.plugins.lspconfig.enable = lib.mkDefault true;
 
-		#
+    #
     # ========== search ==========
     #
     nixvim-config.plugins.telescope.enable = lib.mkDefault true;
 
-		#
+    #
     # ========== utils ==========
     #
-		nixvim-config.plugins.which-key.enable = lib.mkDefault true;
-		nixvim-config.plugins.toggleterm.enable = lib.mkDefault true;
+    nixvim-config.plugins.which-key.enable = lib.mkDefault true;
+    nixvim-config.plugins.toggleterm.enable = lib.mkDefault true;
     nixvim-config.plugins.tmux-navigator.enable = lib.mkDefault true;
     nixvim-config.plugins.wrapping.enable = lib.mkDefault true;
   };

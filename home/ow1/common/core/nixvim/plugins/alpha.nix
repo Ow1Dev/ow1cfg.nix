@@ -1,10 +1,11 @@
-{ config
-, lib
-, ...
-}: {
+{
+  config,
+  lib,
+  ...
+}:
+{
   options = {
-    nixvim-config.plugins.alpha.enable =
-      lib.mkEnableOption "enables alpha module";
+    nixvim-config.plugins.alpha.enable = lib.mkEnableOption "enables alpha module";
   };
 
   config = lib.mkIf config.nixvim-config.plugins.alpha.enable {
@@ -49,7 +50,9 @@
             type = "group";
             val = [
               {
-                on_press = { __raw = "function() vim.cmd[[enew]] end"; };
+                on_press = {
+                  __raw = "function() vim.cmd[[enew]] end";
+                };
                 opts = {
                   shortcut = "";
                   position = "center";
@@ -107,7 +110,9 @@
                 val = 1;
               }
               {
-                on_press = { __raw = "function() vim.cmd[[qa]] end"; };
+                on_press = {
+                  __raw = "function() vim.cmd[[qa]] end";
+                };
                 opts = {
                   shortcut = "";
                   position = "center";

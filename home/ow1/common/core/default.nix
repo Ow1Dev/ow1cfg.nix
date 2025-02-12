@@ -1,14 +1,12 @@
-{ config
-, lib
-, pkgs
-, hostSpec
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  hostSpec,
+  ...
 }:
 let
-  platform =
-    if hostSpec.isDarwin
-    then "darwin"
-    else "nixos";
+  platform = if hostSpec.isDarwin then "darwin" else "nixos";
 in
 {
   imports = lib.flatten [
@@ -83,7 +81,7 @@ in
     unrar # rar extraction
     wget # downloader
     zip # zip compression
-		cbonsai
+    cbonsai
   ];
 
   nix = {

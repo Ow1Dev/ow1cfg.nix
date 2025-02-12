@@ -6,18 +6,18 @@
 
   config = lib.mkIf config.nixvim-config.plugins.illuminate.enable {
     programs.nixvim.plugins = {
-			illuminate = {
-				enable = true; # Used to illuminate same words
-				filetypesDenylist = [
-					"adoc"
-					"asciidoc"
-					"dirvish"
-					"fugitive"
-					"nvimtree"
-					"nvim-tree"
-					"NvimTree"
-				];
-			};
+      illuminate = {
+        enable = true; # Used to illuminate same words
+        filetypesDenylist = [
+          "adoc"
+          "asciidoc"
+          "dirvish"
+          "fugitive"
+          "nvimtree"
+          "nvim-tree"
+          "NvimTree"
+        ];
+      };
     };
   };
 }
