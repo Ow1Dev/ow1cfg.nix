@@ -7,6 +7,7 @@
     # ========== ui ==========
     #
     nixvim-config.plugins.alpha.enable = lib.mkDefault true;
+    nixvim-config.plugins.tmux-navigator.enable = lib.mkDefault true;
 
     #
     # ========== completion ==========
