@@ -24,6 +24,7 @@
       laststatus = 0; # Display status line always
 
       wrap = false; # Don't wrap lines
+      linebreak = true; # Wrap lines at convenient points
 
       # ================ Indentation ======================
       autoindent = true;
