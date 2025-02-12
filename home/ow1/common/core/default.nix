@@ -83,6 +83,7 @@ in
     unrar # rar extraction
     wget # downloader
     zip # zip compression
+		cbonsai
   ];
 
   nix = {
