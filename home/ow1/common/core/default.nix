@@ -40,8 +40,7 @@ in
     sessionVariables = {
       FLAKE = "$HOME/ow1dev.nix";
       SHELL = "zsh";
-      TERM = "kitty";
-      TERMINAL = "kitty";
+      TERM = "xterm-256color";
       VISUAL = "nvim";
       EDITOR = "nvim";
       MANPAGER = "batman"; # see ./cli/bat.nix

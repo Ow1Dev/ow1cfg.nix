@@ -45,8 +45,6 @@
       settings.filetypes = [ "css" "scss" ];
     };
 
-    image.enable = true; # image support
-
     illuminate = {
       enable = true; # Used to illuminate same words
       filetypesDenylist = [
