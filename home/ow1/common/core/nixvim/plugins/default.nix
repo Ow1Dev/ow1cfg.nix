@@ -16,7 +16,7 @@
     #
     # ========== bars/lines ==========
     #
-    nixvim-config.plugins.bufferline.enable = lib.mkDefault true;
+    nixvim-config.plugins.bufferline.enable = lib.mkDefault false;
     nixvim-config.plugins.lualine.enable = lib.mkDefault true;
 
     #
