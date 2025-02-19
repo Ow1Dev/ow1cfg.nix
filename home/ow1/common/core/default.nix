@@ -83,6 +83,7 @@ in
     zip # zip compression
     fzf
     cbonsai
+    devpod
   ];
 
   nix = {
