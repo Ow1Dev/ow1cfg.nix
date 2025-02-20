@@ -36,7 +36,7 @@ in
       "$HOME/scripts/talon_scripts"
     ];
     sessionVariables = {
-      FLAKE = "$HOME/ow1dev.nix";
+      FLAKE = "$HOME/ow1cfg.nix";
       SHELL = "zsh";
       TERM = "xterm-256color";
       VISUAL = "nvim";
