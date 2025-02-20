@@ -46,10 +46,6 @@ in {
   wsl.defaultUser = "ow1";
   wsl.docker-desktop.enable = true;
 
-  virtualisation.docker = {
-     enable = true;
-  };
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   programs.nix-ld.enable = true;

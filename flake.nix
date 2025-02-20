@@ -64,6 +64,24 @@
       nixosConfigurations = mkHostConfigs (readHosts "nixos") false;
 
       #
+      # ========= Packages =========
+      #
+      # Add custom packages to be shared or upstreamed.
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.default ];
+          };
+        in
+        lib.packagesFromDirectoryRecursive {
+          callPackage = lib.callPackageWith pkgs;
+          directory = ./pkgs/common;
+        }
+      );
+
+      #
       # ========= Formatting =========
       #
       # Nix formatter available through 'nix fmt' https://nix-community.github.io/nixpkgs-fmt

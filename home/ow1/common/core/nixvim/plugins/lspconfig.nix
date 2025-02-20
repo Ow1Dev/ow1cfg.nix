@@ -155,11 +155,6 @@ in
               };
             };
           };
-          onAttach = ''
-             if client.server_capabilities.semanticTokensProvider then
-                vim.cmd("autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.buf.semantic_tokens_full()")
-             end
-            '';
         };
       };
       extraConfigLua = ''

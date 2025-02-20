@@ -5,6 +5,12 @@
 { inputs, ... }:
 
 let
+  additions =
+    final: prev:
+    (prev.lib.packagesFromDirectoryRecursive {
+      callPackage = prev.lib.callPackageWith final;
+      directory = ../pkgs/common;
+    });
   linuxModifications = final: prev: prev.lib.mkIf final.stdenv.isLinux { };
 
   modifications = final: prev: {
@@ -21,9 +27,9 @@ let
     devpod = prev.devpod.overrideAttrs (old: {
         version = "0.6.12"; # Replace with the desired version
         src = prev.fetchFromGitHub {
-          owner = "loft-sh";
+          owner = "Ow1Dev";
           repo = "devpod";
-          rev = "v0.6.12";
+          rev = "1e063c6cc97f70c76cbd03fc1fd11b4eea303a15";
           sha256 = "sha256-ux4tZ9qoH1rvcQoWFFb714+TQi5+KTi8hKH7F8eKx5I=";
         };
 
@@ -56,7 +62,8 @@ in
   default =
     final: prev:
 
-    (modifications final prev)
+    (additions final prev)
+    // (modifications final prev)
     // (linuxModifications final prev)
     // (stable-packages final prev)
     // (unstable-packages final prev);
