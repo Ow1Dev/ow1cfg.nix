@@ -22,7 +22,7 @@ buildGoModule {
     owner = "Ow1Dev";
     repo = pname;
     rev = commit;
-    sha256 = "sha256-8LbqrOKC1als3Xm6ZuU2AySwT0UWjLN2xh+/CvioYew=";
+    sha256 = "sha256-pBnbEmiUOBGjMtizBxTvDRBcL306Sit2aRsEXU28S8M=";
   };
 
   vendorHash = null;
@@ -33,11 +33,4 @@ buildGoModule {
   ];
 
   excludedPackages = [ "./e2e" ];
-
-  postInstall = ''
-      $out/bin/devpod completion bash >devpod.bash
-      $out/bin/devpod completion fish >devpod.fish
-      $out/bin/devpod completion zsh >devpod.zsh
-      installShellCompletion devpod.{bash,fish,zsh}
-  '';
 }

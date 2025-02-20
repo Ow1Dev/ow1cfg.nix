@@ -29,6 +29,10 @@
       ll = "eza -la --icons --octal-permissions --group-directories-first";
     };
 
+    sessionVariables = {
+      SHELL = "zsh";
+    };
+
     dotDir = ".config/zsh";
     history.path = "${config.home.homeDirectory}/.config/zsh/.zsh_history";
   };

@@ -23,20 +23,6 @@ let
     #        (prev.lib.cmakeBool "USE_WAYLAND_CLIPBOARD" true)
     #      ];
     #    };
-
-    devpod = prev.devpod.overrideAttrs (old: {
-        version = "0.6.12"; # Replace with the desired version
-        src = prev.fetchFromGitHub {
-          owner = "Ow1Dev";
-          repo = "devpod";
-          rev = "1e063c6cc97f70c76cbd03fc1fd11b4eea303a15";
-          sha256 = "sha256-ux4tZ9qoH1rvcQoWFFb714+TQi5+KTi8hKH7F8eKx5I=";
-        };
-
-        ldflags = [
-            "-X github.com/loft-sh/devpod/pkg/version.version=v0.6.12"
-        ];
-    });
   };
 
   stable-packages = final: _prev: {
