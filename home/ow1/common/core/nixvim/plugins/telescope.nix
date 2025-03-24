@@ -12,7 +12,7 @@
       keymaps = [
         # Telescope stuff
         {
-          key = "<Leader>ff";
+          key = "<C-p>";
           action = "<cmd> Telescope fd <CR>";
           mode = "n";
           options.desc = "Find files";
