@@ -27,3 +27,7 @@ update:
 # Git diff there entire repo expcept for flake.lock
 diff:
   git diff ':!flake.lock'
+
+build-host HOST:
+    NIX_SSHOPTS="-p22" nixos-rebuild --target-host {{HOST}} --use-remote-sudo --show-trace --impure --flake .#"{{HOST}}" switch
+

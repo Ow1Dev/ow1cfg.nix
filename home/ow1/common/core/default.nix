@@ -16,6 +16,7 @@ in
     ])
     ./${platform}.nix
     ./zsh.nix
+    ./bat.nix
     ./git.nix
     ./zoxide.nix
     ./direnv.nix
