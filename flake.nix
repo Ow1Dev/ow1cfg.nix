@@ -104,6 +104,8 @@
       url = "github:ghostty-org/ghostty";
     };
 
+    anyrun.url = "github:fufexan/anyrun/launch-prefix";
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
