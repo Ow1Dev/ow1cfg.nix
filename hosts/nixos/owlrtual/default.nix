@@ -28,7 +28,7 @@
       #
       # ========== Optional Configs ==========
       #
-      "hosts/common/optional/services/gdm.nix" 
+      "hosts/common/optional/services/greetd.nix" 
       "hosts/common/optional/services/openssh.nix" 
       "hosts/common/optional/audio.nix"
     ])
@@ -45,6 +45,8 @@
     networkmanager.enable = true;
     enableIPv6 = false;
   };
+
+  virtualisation.virtualbox.guest.enable = true;
 
   boot.loader.grub = {
     enable = true;

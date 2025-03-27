@@ -28,7 +28,7 @@ in {
         (makeCommand "wl-paste --type text --watch cliphist store")
       ];
       input = {
-        keyboard.xkb.layout = "da-dk";
+        keyboard.xkb.layout = "dk";
         touchpad = {
           click-method = "button-areas";
           dwt = true;
