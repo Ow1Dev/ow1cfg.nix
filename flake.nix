@@ -110,5 +110,10 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser = {
+        url = "github:pfaj/zen-browser-flake";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
