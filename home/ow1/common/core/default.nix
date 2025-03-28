@@ -18,6 +18,7 @@ in
     ./zsh.nix
     ./bat.nix
     ./git.nix
+    ./fonts.nix
     ./zoxide.nix
     ./direnv.nix
     ./tmux.nix
