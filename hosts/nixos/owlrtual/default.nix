@@ -28,9 +28,10 @@
       #
       # ========== Optional Configs ==========
       #
-      "hosts/common/optional/services/greetd.nix" 
-      "hosts/common/optional/services/openssh.nix" 
-      "hosts/common/optional/audio.nix"
+      "hosts/common/optional/services/greetd.nix" # display manager
+      "hosts/common/optional/services/openssh.nix" # allow remote SSH access 
+      "hosts/common/optional/audio.nix" # pipewire and cli controls
+      "hosts/common/optional/wayland.nix" # wayland components and pkgs not available in home-manager
     ])
   ];
 
