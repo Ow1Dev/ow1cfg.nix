@@ -43,6 +43,7 @@
   };
 
   networking = {
+    useDHCP = false;
     networkmanager.enable = true;
     enableIPv6 = false;
   };
