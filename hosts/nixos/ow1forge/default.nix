@@ -1,9 +1,11 @@
-{ inputs
-, lib
-, ...
+{
+  inputs,
+  lib,
+  ...
 }:
 let
-in {
+in
+{
   imports = lib.flatten [
     #
     # ========== Hardware ==========

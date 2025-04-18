@@ -1,11 +1,13 @@
 {
   pkgs,
   ...
-}: let
+}:
+let
   makeCommand = command: {
-    command = [command];
+    command = [ command ];
   };
-in {
+in
+{
   programs.niri = {
     enable = true;
     package = pkgs.niri;
@@ -63,16 +65,18 @@ in {
           active.color = "#16aff1";
           inactive.color = "#245b89";
         };
-                #shadow = {
-                # enable = true;
-                # };
+        #shadow = {
+        # enable = true;
+        # };
         preset-column-widths = [
-          {proportion = 0.25;}
-          {proportion = 0.5;}
-          {proportion = 0.75;}
-          {proportion = 1.0;}
+          { proportion = 0.25; }
+          { proportion = 0.5; }
+          { proportion = 0.75; }
+          { proportion = 1.0; }
         ];
-        default-column-width = {proportion = 0.5;};
+        default-column-width = {
+          proportion = 0.5;
+        };
 
         gaps = 8;
         struts = {
@@ -82,16 +86,16 @@ in {
           bottom = 10;
         };
 
-                #tab-indicator = {
-                #hide-when-single-tab = true;
-                #place-within-column = true;
-                #position = "left";
-                #corner-radius = 20.0;
-                #gap = -9.0;
-                #gaps-between-tabs = 10.0;
-                #width = 4.0;
-                #length.total-proportion = 0.1;
-                #};
+        #tab-indicator = {
+        #hide-when-single-tab = true;
+        #place-within-column = true;
+        #position = "left";
+        #corner-radius = 20.0;
+        #gap = -9.0;
+        #gaps-between-tabs = 10.0;
+        #width = 4.0;
+        #length.total-proportion = 0.1;
+        #};
       };
 
       animations.shaders.window-resize = ''

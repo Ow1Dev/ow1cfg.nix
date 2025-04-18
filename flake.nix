@@ -2,10 +2,11 @@
   description = "A very basic flake";
 
   outputs =
-    { self
-    , nixpkgs
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs) lib;
@@ -24,10 +25,7 @@
       mkHost = host: isDarwin: {
         ${host} =
           let
-            func =
-              if isDarwin
-              then inputs.nix-darwin.lib.darwinSystem
-              else lib.nixosSystem;
+            func = if isDarwin then inputs.nix-darwin.lib.darwinSystem else lib.nixosSystem;
             systemFunc = func;
           in
           systemFunc {
@@ -44,17 +42,14 @@
               lib = nixpkgs.lib.extend (self: super: { custom = import ./lib { inherit (nixpkgs) lib; }; });
             };
             modules = [
-              ./hosts/${
-              if isDarwin
-              then "darwin"
-              else "nixos"
-            }/${host}
+              ./hosts/${if isDarwin then "darwin" else "nixos"}/${host}
             ];
           };
       };
 
       # Invoke mkHost for each host config that is declared for either nixos or darwin
-      mkHostConfigs = hosts: isDarwin: lib.foldl (acc: set: acc // set) { } (lib.map (host: mkHost host isDarwin) hosts);
+      mkHostConfigs =
+        hosts: isDarwin: lib.foldl (acc: set: acc // set) { } (lib.map (host: mkHost host isDarwin) hosts);
 
       # Return the hosts declared in the given directory
       readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
@@ -112,8 +107,8 @@
     };
 
     zen-browser = {
-        url = "github:pfaj/zen-browser-flake";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:pfaj/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
