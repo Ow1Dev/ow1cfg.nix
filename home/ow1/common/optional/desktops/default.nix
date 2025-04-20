@@ -5,7 +5,7 @@
     ./niri
 
     ########## Utilities ##########
-    # ./services/dunst.nix # Notification daemon
+    ./services/dunst.nix # Notification daemon
     ./waybar # infobar
     ./rofi # app launcher
     ./ghostty.nix # terminal
