@@ -61,9 +61,9 @@ in
         focus-ring.enable = false;
         border = {
           enable = true;
-          width = 1;
-          active.color = "#16aff1";
-          inactive.color = "#245b89";
+          width = 3;
+          active.color = "#cba6f7";
+          inactive.color = "#6c7086";
         };
         #shadow = {
         # enable = true;

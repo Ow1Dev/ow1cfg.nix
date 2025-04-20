@@ -42,7 +42,7 @@ let
     {
       geometry-corner-radius =
         let
-          radius = 16.0;
+          radius = 5.0;
         in
         {
           bottom-left = radius;
@@ -57,31 +57,6 @@ let
       matches = [
         { is-floating = true; }
       ];
-      # shadow.enable = true;
-    }
-    {
-      # matches = [
-      # {
-      # is-window-cast-target = true;
-      # }
-      # ];
-      focus-ring = {
-        active.color = "#f38ba8";
-        inactive.color = "#7d0d2d";
-      };
-
-      border = {
-        inactive.color = "#7d0d2d";
-      };
-
-      # shadow = {
-      # color = "#7d0d2d70";
-      #};
-
-      # tab-indicator = {
-      # active.color = "#f38ba8";
-      # inactive.color = "#7d0d2d";
-      # };
     }
     {
       matches = [ { app-id = "org.telegram.desktop"; } ];
@@ -96,7 +71,6 @@ let
         { app-id = "^(zen|firefox|chromium-browser|chrome-.*|zen-.*)$"; }
         { app-id = "^(xdg-desktop-portal-gtk)$"; }
       ];
-      # scroll-factor = 0.1;
     }
     {
       matches = [
