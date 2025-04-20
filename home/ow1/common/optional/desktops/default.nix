@@ -2,9 +2,7 @@
 {
   imports = [
     # Packages with custom configs go here
-
     ./niri
-    ./anyrun
 
     ########## Utilities ##########
     # ./services/dunst.nix # Notification daemon

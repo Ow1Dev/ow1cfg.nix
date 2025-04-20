@@ -30,7 +30,7 @@
       # "Print".action = screenshot-screen;
       # "Mod+Shift+Alt+S".action = screenshot-window;
       # "Mod+Shift+S".action = screenshot;
-      "Mod+D".action = spawn "${pkgs.anyrun}/bin/anyrun";
+      "Mod+D".action = spawn "${pkgs.rofi-wayland}/bin/rofi" "-show" "drun";
       "Mod+Return".action = spawn "${inputs.ghostty.packages.${pkgs.system}.default}/bin/ghostty";
       "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
