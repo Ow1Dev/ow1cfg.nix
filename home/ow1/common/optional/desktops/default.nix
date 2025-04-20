@@ -8,6 +8,7 @@
     # ./services/dunst.nix # Notification daemon
     ./waybar # infobar
     ./rofi # app launcher
+    ./ghostty.nix # terminal
     #./fonts.nix
     #./playerctl.nix # cli util and lib for controlling media players that implement MPRIS
     #./gtk.nix # mainly in gnome
