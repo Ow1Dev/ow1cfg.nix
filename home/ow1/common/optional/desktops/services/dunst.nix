@@ -143,9 +143,10 @@
         offset = "30x50";
         #origin = "top-right";
         origin = "top-center";
+        frame_color = "#8aadf4";
+        separator_color = "frame";
 
-        #TODO dynamic theme colours
-        #      frame_color = "#dc7f41";
+        highlight = "#8aadf4";
 
         # Browser for opening urls in context menu.
         browser = "firefox";
@@ -153,47 +154,24 @@
 
       frame = {
         width = 2;
-        #TODO dynamic colours
-        #        color = "#dc7f41";
-      };
-
-      shortcuts = {
-        # Shortcuts are specified as [modifier+][modifier+]...key
-        # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
-        # "mod3" and "mod4" (windows-key).
-        # Xev might be helpful to find names for keys.
-
-        # Close notification.
-        close = "mod1+space";
-
-        # Close all notifications.
-        close_all = "ctrl+mod1+space";
-
-        # Redisplay last message(s).
-        history = "ctrl+mod4+h";
-
-        # Context menu.
-        context = "ctrl+mod1+c";
       };
 
       urgency_low = {
-        #TODO dynamic colours
-        #        background = "#1e1e20";
-        #        foreground = "#c5c8c6";
+        background = "#24273a";
+        foreground = "#cad3f5";
         timeout = 10;
       };
 
       urgency_normal = {
-        #TODO dynamic colours
-        #        background = "#1e1e20";
-        #        foreground = "#c5c8c6";
+        background = "#24273a";
+        foreground = "#cad3f5";
         timeout = 10;
       };
 
       urgency_critical = {
-        #TODO dynamic colours
-        #        background = "#1e1e20";
-        #        foreground = "#c5c8c6";
+        background = "#24273a";
+        foreground = "#cad3f5";
+        frame_color = "#f5a97f";
         timeout = 0;
       };
     };
