@@ -104,6 +104,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sherlock.url = "github:Skxxtz/sherlock";
+
     zen-browser = {
       url = "github:pfaj/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
