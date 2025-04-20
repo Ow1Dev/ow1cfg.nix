@@ -41,7 +41,6 @@ in
           tap-button-map = "left-right-middle";
           middle-emulation = true;
           accel-profile = "adaptive";
-          # scroll-factor = 0.2;
         };
         focus-follows-mouse.enable = true;
         warp-mouse-to-focus = true;
@@ -65,9 +64,6 @@ in
           active.color = "#cba6f7";
           inactive.color = "#6c7086";
         };
-        #shadow = {
-        # enable = true;
-        # };
         preset-column-widths = [
           { proportion = 0.25; }
           { proportion = 0.5; }
@@ -85,17 +81,6 @@ in
           top = 2;
           bottom = 10;
         };
-
-        #tab-indicator = {
-        #hide-when-single-tab = true;
-        #place-within-column = true;
-        #position = "left";
-        #corner-radius = 20.0;
-        #gap = -9.0;
-        #gaps-between-tabs = 10.0;
-        #width = 4.0;
-        #length.total-proportion = 0.1;
-        #};
       };
 
       animations.shaders.window-resize = ''

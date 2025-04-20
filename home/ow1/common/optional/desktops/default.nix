@@ -9,6 +9,7 @@
     ./waybar # infobar
     ./rofi # app launcher
     ./ghostty.nix # terminal
+    ./hyprlock.nix # lock
     #./fonts.nix
     #./playerctl.nix # cli util and lib for controlling media players that implement MPRIS
     #./gtk.nix # mainly in gnome
