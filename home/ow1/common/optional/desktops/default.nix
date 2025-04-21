@@ -11,6 +11,7 @@
     ./ghostty.nix # terminal
     ./hyprlock.nix # lock
     ./sherlock.nix # lock
+    ./yazi.nix # lock
     #./fonts.nix
     #./playerctl.nix # cli util and lib for controlling media players that implement MPRIS
     #./gtk.nix # mainly in gnome
