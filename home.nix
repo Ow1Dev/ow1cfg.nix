@@ -1,6 +1,7 @@
 { config, pkgs, inputs, ... }: {
   imports = [
     ./home/desktop
+    ./home/terminal
   ];
 
   home.username = "ow1";
