@@ -1,21 +1,19 @@
-{ config, pkgs, ...}: {
+{ config, pkgs, inputs, ... }: {
+  imports = [
+    ./home/desktop/niri
+  ];
 
-	home.username="ow1";
-	home.homeDirectory="/home/ow1";
+  home.username = "ow1";
+  home.homeDirectory = "/home/ow1";
 
-	programs.bash = {
-		enable = true;
-		shellAliases = {
-			btw = "echo I use nixos, btw";
-		};
-	};
+  home.stateVersion = "25.05";
 
-	programs.git = {
-		enable = true;
-		userName = "Ow1Dev";
-		userEmail = "31339803+Ow1Dev@users.noreply.github.com";
-	};
+  programs.bash.enable = true;
+  programs.bash.shellAliases.btw = "echo I use nixos, btw";
 
-
-	home.stateVersion = "25.05";
+  programs.git = {
+    enable = true;
+    userName = "Ow1Dev";
+    userEmail = "31339803+Ow1Dev@users.noreply.github.com";
+  };
 }
