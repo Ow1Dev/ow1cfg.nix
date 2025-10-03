@@ -27,5 +27,7 @@
        "Mod+Shift+L".action = move-column-right;
        "Mod+Shift+K".action = move-column-to-workspace-up;
        "Mod+Shift+J".action = move-column-to-workspace-down;
+
+       "Mod+Shift+S".action.screenshot = {show-pointer = false;};
   };
 }

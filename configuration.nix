@@ -41,6 +41,7 @@
  
   programs.niri.enable = true;
   programs.firefox.enable = true;
+  programs.localsend.enable = true;
 
   console.keyMap = "dk-latin1";
 

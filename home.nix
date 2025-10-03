@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }: {
   imports = [
-    ./home/desktop/niri
+    ./home/desktop
   ];
 
   home.username = "ow1";
