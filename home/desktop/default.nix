@@ -2,6 +2,7 @@
   imports = [
     ./niri
     ./terminal/ghostty.nix
+    ./waybar.nix
   ];
 
   home.packages = with pkgs; [
