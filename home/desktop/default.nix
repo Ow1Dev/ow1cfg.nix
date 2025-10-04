@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   imports = [
     ./niri
     ./terminal/ghostty.nix

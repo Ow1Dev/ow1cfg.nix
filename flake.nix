@@ -14,13 +14,18 @@
     ow1nvim.url = "github:Ow1Dev/Ow1Nvim";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-  let
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
   in {
+    formatter.${system} = pkgs.alejandra;
     nixosConfigurations.nestop = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs system; };
+      specialArgs = {inherit inputs system;};
 
       modules = [
         ./configuration.nix
@@ -31,7 +36,7 @@
           home-manager.backupFileExtension = "backup";
 
           # Provide the module directly (not by import)
-	  home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.ow1 = ./home.nix;
         }
       ];

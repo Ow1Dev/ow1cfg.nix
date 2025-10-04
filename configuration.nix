@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./systems/nix/nh.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./systems/nix/nh.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,11 +36,11 @@
   };
 
   services.xserver = {
-     enable = true;
-     displayManager.gdm.enable = true;
-     desktopManager.gnome.enable = false;
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = false;
   };
- 
+
   programs.niri.enable = true;
   programs.firefox.enable = true;
   programs.localsend.enable = true;
@@ -52,18 +53,18 @@
     isNormalUser = true;
     description = "ow1";
     shell = pkgs.nushell;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
   };
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     git
-     ghostty
-     foot
-     fuzzel
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    git
+    ghostty
+    foot
+    fuzzel
   ];
 
   hardware.bluetooth = {
@@ -77,7 +78,7 @@
 
   services.blueman.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  system.stateVersion = "25.05"; 
+  system.stateVersion = "25.05";
 }

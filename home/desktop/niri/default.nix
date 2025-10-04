@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   # Temporarily disable imports to isolate
   imports = [
     inputs.niri.homeModules.niri
@@ -7,5 +12,5 @@
     ./rules.nix
   ];
 
-  home.packages = with pkgs; [ seatd jaq ];
+  home.packages = with pkgs; [seatd jaq];
 }
