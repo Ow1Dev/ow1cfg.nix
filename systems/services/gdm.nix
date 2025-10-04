@@ -10,5 +10,6 @@
     desktopManager.gnome.enable = false;
   };
 
+  programs.xwayland.enable = true;
   programs.niri.enable = true;
 }

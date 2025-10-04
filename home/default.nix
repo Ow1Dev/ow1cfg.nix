@@ -2,6 +2,7 @@
   imports = [
     ./desktop
     ./terminal
+    ./software
   ];
 
   home.username = "ow1";
