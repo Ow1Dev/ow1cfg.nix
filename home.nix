@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{ ... }: {
   imports = [
     ./home/desktop
     ./home/terminal
@@ -13,6 +8,11 @@
   home.homeDirectory = "/home/ow1";
 
   home.stateVersion = "25.05";
+
+  home.shellAliases = {
+    vim = "nvim";
+    vi = "nvim";
+  };
 
   programs.bash.enable = true;
   programs.bash.shellAliases.btw = "echo I use nixos, btw";
