@@ -65,7 +65,6 @@
       #tray {
         padding: 0 16px;
         margin: 6px 4px;
-        border-radius: 6px;
         transition: all 0.3s ease;
       }
       
