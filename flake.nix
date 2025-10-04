@@ -36,7 +36,7 @@
           home-manager.backupFileExtension = "backup";
 
           home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.ow1 = ./home.nix;
+          home-manager.users.ow1 = ./home;
         }
       ];
     };
