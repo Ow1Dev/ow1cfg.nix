@@ -9,6 +9,7 @@
 
     "Mod+Q".action = close-window;
     "Mod+F".action = maximize-column;
+    "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;
 
     "Mod+C".action = center-visible-columns;
@@ -29,5 +30,8 @@
     "Mod+Shift+J".action = move-column-to-workspace-down;
 
     "Mod+Shift+S".action.screenshot = {show-pointer = false;};
+
+    "Mod+Shift+Ctrl+J".action = move-column-to-monitor-down;
+    "Mod+Shift+Ctrl+K".action = move-column-to-monitor-up;
   };
 }

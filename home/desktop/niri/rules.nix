@@ -25,18 +25,18 @@ _: let
         }
       ];
       focus-ring = {
-        active.color = "#f38ba8";
-        inactive.color = "#7d0d2d";
+        active.color = "#88C0D0";
+        inactive.color = "#4C566A";
       };
       border = {
-        inactive.color = "#7d0d2d";
+        inactive.color = "#4C566A";
       };
       shadow = {
-        color = "#7d0d2d70";
+        color = "#3B425270";
       };
       tab-indicator = {
-        active.color = "#f38ba8";
-        inactive.color = "#7d0d2d";
+        active.color = "#88C0D0";
+        inactive.color = "#4C566A";
       };
     }
     {
