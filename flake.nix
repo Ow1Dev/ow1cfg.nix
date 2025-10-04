@@ -11,6 +11,7 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ow1nvim.url = "github:Ow1Dev/Ow1Nvim";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
