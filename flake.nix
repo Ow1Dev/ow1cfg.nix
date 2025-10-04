@@ -28,14 +28,13 @@
       specialArgs = {inherit inputs system;};
 
       modules = [
-        ./configuration.nix
+        ./hosts/nestop
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
 
-          # Provide the module directly (not by import)
           home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.ow1 = ./home.nix;
         }
