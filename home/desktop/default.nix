@@ -3,6 +3,7 @@
     ./niri
     ./terminal/ghostty.nix
     ./waybar.nix
+    ./rofi.nix
   ];
 
   home.packages = with pkgs; [

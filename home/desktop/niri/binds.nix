@@ -5,7 +5,7 @@
 }: {
   programs.niri.settings.binds = with config.lib.niri.actions; {
     "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
-    "Mod+D".action = spawn "${pkgs.fuzzel}/bin/fuzzel";
+    "Mod+D".action = spawn-sh "rofi -show drun";
 
     "Mod+Q".action = close-window;
     "Mod+F".action = maximize-column;
