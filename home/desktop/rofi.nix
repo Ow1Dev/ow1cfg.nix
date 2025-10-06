@@ -1,7 +1,7 @@
-{ pkgs, config, ... }: {
+{ pkgs-unstable, config, ... }: {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package =  pkgs-unstable.rofi;
     extraConfig = {
         modi = "drun";
         show-icons = true;
