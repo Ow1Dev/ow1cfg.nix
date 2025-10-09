@@ -10,6 +10,5 @@
     ./network
     ./nix
     ./hardware/bluetooth.nix
-
   ];
 }

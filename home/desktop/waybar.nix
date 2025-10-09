@@ -2,7 +2,7 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    
+
     settings = {
       mainBar = {
         layer = "top";
@@ -11,11 +11,11 @@
         height = 34;
         width = 800;
         margin-top = 8;
-        
-        modules-left = [ "niri/workspaces" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "tray" ];
-        
+
+        modules-left = ["niri/workspaces"];
+        modules-center = ["clock"];
+        modules-right = ["battery" "tray"];
+
         "niri/workspaces" = {
           format = "{icon}";
           format-icons = {
@@ -23,7 +23,7 @@
             active = "●";
           };
         };
-        
+
         clock = {
           format = "{:%H:%M}";
           tooltip-format = "<tt>{calendar}</tt>";
@@ -37,13 +37,21 @@
             };
           };
         };
-        
+        battery = {
+          format = "{icon} {capacity}%";
+          format-charging = " {capacity}%";
+          format-plugged = " {capacity}%";
+          format-alt = "{time}";
+
+          format-icons = ["" "" "" "" ""]; # Icons for levels
+          interval = 30; # Update interval in seconds
+        };
         tray = {
           spacing = 10;
         };
       };
     };
-    
+
     style = ''
       * {
         border: none;
@@ -51,7 +59,7 @@
         font-size: 13px;
         min-height: 0;
       }
-      
+
       window#waybar {
         background: rgba(46, 52, 64, 0.85);
         border-bottom: 1px solid #181825;
@@ -59,29 +67,30 @@
         color: #d8dee9;
         transition-property: background-color;
       }
-      
+
       #workspaces,
       #clock,
-      #tray {
-        padding: 0 16px;
-        margin: 6px 4px;
+      #tray,
+      #battery {
+        padding: 0 8px;
+        margin: 6px 0px;
         transition: all 0.3s ease;
       }
-      
+
       #workspaces {
         margin-left: 8px;
         padding: 0 8px;
       }
-      
+
       #clock {
         color: #eceff4;
         font-weight: 500;
       }
-      
+
       #tray {
         margin-right: 8px;
       }
-      
+
       #workspaces button {
         padding: 0 10px;
         color: #4c566a;
@@ -90,31 +99,31 @@
         border-radius: 4px;
         margin: 2px 2px;
       }
-      
+
       #workspaces button.active {
         color: #88c0d0;
       }
-      
+
       #workspaces button:hover {
         color: #81a1c1;
       }
-      
+
       #tray > .passive {
         -gtk-icon-effect: dim;
       }
-      
+
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
         color: #bf616a;
       }
-      
+
       tooltip {
         background: rgba(46, 52, 64, 0.95);
         border: 1px solid rgba(136, 192, 208, 0.3);
         border-radius: 6px;
         color: #d8dee9;
       }
-      
+
       tooltip label {
         color: #d8dee9;
         padding: 4px;

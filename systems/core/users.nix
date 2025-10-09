@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.shells = with pkgs; [nushell];
 
   users.users.ow1 = {
