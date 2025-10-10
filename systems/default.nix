@@ -9,6 +9,8 @@
 
     ./network
     ./nix
+
     ./hardware/bluetooth.nix
+    ./hardware/nvidia.nix
   ];
 }
