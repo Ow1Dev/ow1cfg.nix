@@ -166,11 +166,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1760456201,
-        "narHash": "sha256-Hvdov6lVsGOxSZ5fLWeldCvWZJsymvlzclKa8m6WSy0=",
+        "lastModified": 1760460109,
+        "narHash": "sha256-V9DNq8w73OMD+wcZw9SGIOSRtikL2Bdu2nNSHmGIXQs=",
         "owner": "Ow1Dev",
         "repo": "Ow1Nvim",
-        "rev": "51af71768b8af08477b0e011bdca342bf950988b",
+        "rev": "71452ed873cb639be718497168c8445678b02633",
         "type": "github"
       },
       "original": {
