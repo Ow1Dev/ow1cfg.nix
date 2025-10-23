@@ -64,6 +64,7 @@ _: let
         {app-id = "edge";}
       ];
       open-maximized = true;
+      tiled-state = true;
     }
     {
       matches = [
