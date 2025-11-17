@@ -4,6 +4,7 @@ in {
   imports = [
     ./browsers/chromium.nix
     ./webapps/notion.nix
+    ./media
   ];
 
   home.packages = [
