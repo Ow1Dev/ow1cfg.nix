@@ -5,7 +5,7 @@
     isNormalUser = true;
     description = "ow1";
     shell = pkgs.nushell;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm"];
     packages = [];
   };
 }

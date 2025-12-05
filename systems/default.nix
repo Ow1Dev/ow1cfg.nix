@@ -4,6 +4,7 @@
     ./core/default.nix
 
     ./services/gdm.nix
+    ./services/virt-manager.nix
 
     ./programs
 

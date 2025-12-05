@@ -5,7 +5,7 @@
     ./substituters.nix
   ];
 
-  environment.systemPackages = [pkgs.git];
+  environment.systemPackages = [pkgs.git pkgs.vim];
 
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];

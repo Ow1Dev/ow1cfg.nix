@@ -9,5 +9,6 @@ in {
 
   home.packages = [
     spotify-wayland
+    pkgs.looking-glass-client
   ];
 }
