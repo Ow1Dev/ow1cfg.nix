@@ -10,6 +10,9 @@
           vi_normal = "block";
         };
       };
+      environmentVariables = {
+        EDITOR = "nvim";
+      };
       shellAliases = {
         cat = "bat --number --color=always --paging=never --tabs=2 --wrap=never";
       };
