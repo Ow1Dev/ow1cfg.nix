@@ -26,6 +26,7 @@
           devShells.default = pkgs.mkShell {
             packages = [
               pkgs.lua-language-server
+              pkgs.nixd
             ];
           };
         };
