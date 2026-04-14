@@ -16,11 +16,19 @@
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       let
-	modules = inputs.import-tree ./modules;
+        modules = inputs.import-tree ./modules;
         hosts = inputs.import-tree ./hosts;
       in
       {
         imports = modules.imports ++ hosts.imports;
-      }
-    );
+
+        perSystem = { pkgs, ... }: {
+          devShells.default = pkgs.mkShell {
+            packages = [
+              pkgs.lua-language-server
+            ];
+          };
+        };
+    }
+  );
 }

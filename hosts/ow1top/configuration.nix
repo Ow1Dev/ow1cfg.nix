@@ -97,6 +97,7 @@
     environment.systemPackages = with pkgs; [
        librewolf
        git
+       wl-clipboard
     ];
 
  

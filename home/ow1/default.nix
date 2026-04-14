@@ -3,6 +3,8 @@
 
   imports = [
     ./git.nix
+    
+    ../common/terminal/ghostty.nix
   ];
 
   home.packages = with pkgs; [
