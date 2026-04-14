@@ -4,6 +4,7 @@
     # import any other modules from here
     imports = [
       self.nixosModules.ow1topHardware
+      inputs.home-manager.nixosModules.home-manager
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -75,6 +76,19 @@
       ];
     };
 
+
+    # Move it somewhere else
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+
+      extraSpecialArgs = {
+        inherit self;
+      };
+
+      users.ow1 = import ../../home/ow1;
+    };
+
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
@@ -83,9 +97,6 @@
     environment.systemPackages = with pkgs; [
        librewolf
        git
-
-       # my neovim config
-       self.packages.${pkgs.stdenv.hostPlatform.system}.neovim
     ];
 
  
