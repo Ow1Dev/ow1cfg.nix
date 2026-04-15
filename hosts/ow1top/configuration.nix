@@ -104,6 +104,7 @@
       librewolf
       git
       wl-clipboard
+      nerd-fonts.jetbrains-mono
     ];
 
     system.stateVersion = "25.11";

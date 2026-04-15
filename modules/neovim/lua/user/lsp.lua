@@ -1,26 +1,27 @@
-local cmp = require 'cmp'
+-- CMP
+require "mini.completion".setup()
 
-cmp.setup({
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'path' },
-    { name = 'buffer' },
-  })
-})
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-vim.lsp.config('*', {
-  capabilities = capabilities
-})
+-- LSP
 
 vim.lsp.enable({
 	"lua_ls",
 	"nixd",
 })
+
+local function lsp_on_attach(ev)
+	local client = vim.lsp.get_client_by_id(ev.data.client_id)
+	if not client then
+		return
+	end
+
+	local bufnr = ev.buf
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+end
+
+vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_on_attach })

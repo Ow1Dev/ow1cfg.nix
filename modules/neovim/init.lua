@@ -1,8 +1,8 @@
 vim.pack.add {
-  'https://github.com/nordtheme/vim',
+  'https://github.com/AlexvZyl/nordic.nvim',
   'https://github.com/nvim-lualine/lualine.nvim',
 
-  'https://github.com/nvim-mini/mini.pick',
+  'https://github.com/nvim-mini/mini.nvim',
 
   -- Treesitter
 	{
@@ -13,13 +13,9 @@ vim.pack.add {
 
   -- CMP & LSP
   'https://github.com/neovim/nvim-lspconfig',
-  'https://github.com/hrsh7th/cmp-nvim-lsp',
-  'https://github.com/hrsh7th/cmp-buffer',
-  'https://github.com/hrsh7th/cmp-path',
-  'https://github.com/hrsh7th/nvim-cmp',
 }
 
-vim.cmd.colorscheme("nord")
+vim.cmd.colorscheme("nordic")
 
 require "user.options"
 require "user.mini"
