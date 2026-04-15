@@ -9,6 +9,9 @@
       settings.config_directory = ./.;
       extraPackages = with pkgs; [
         ripgrep
+        tree-sitter
+        gcc
+        gnumake
       ];
     };
   };

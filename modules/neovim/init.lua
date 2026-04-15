@@ -1,9 +1,15 @@
-require "user.options"
-
 vim.pack.add {
   'https://github.com/nordtheme/vim',
+  'https://github.com/nvim-lualine/lualine.nvim',
 
   'https://github.com/nvim-mini/mini.pick',
+
+  -- Treesitter
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+	},
 
   -- CMP & LSP
   'https://github.com/neovim/nvim-lspconfig',
@@ -15,32 +21,8 @@ vim.pack.add {
 
 vim.cmd.colorscheme("nord")
 
-local mini = require("mini.pick")
-mini.setup()
-
-vim.keymap.set('n', '<C-p>', '<cmd>:Pick files<cr>')
-
-local cmp = require 'cmp'
-
-cmp.setup({
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'path' },
-    { name = 'buffer' },
-  })
-})
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-vim.lsp.config('*', {
-  capabilities = capabilities
-})
-
-vim.lsp.enable({'lua_ls', 'nixd'})
-
+require "user.options"
+require "user.mini"
+require "user.lualine"
+require "user.lsp"
+require "user.treesitter"
