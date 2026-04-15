@@ -1,14 +1,21 @@
-{ self, inputs, ... }: {
-
-  flake.nixosModules.ow1topConfiguration = { pkgs, lib, ... }: {
+{
+  self,
+  inputs,
+  ...
+}: {
+  flake.nixosModules.ow1topConfiguration = {
+    pkgs,
+    lib,
+    ...
+  }: {
     # import any other modules from here
     imports = [
       self.nixosModules.ow1topHardware
       inputs.home-manager.nixosModules.home-manager
     ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+    nix.settings.experimental-features = ["nix-command" "flakes"];
+
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -70,12 +77,11 @@
     users.users.ow1 = {
       isNormalUser = true;
       description = "Mads Bruun Jensen";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [
         kdePackages.kate
       ];
     };
-
 
     # Move it somewhere else
     home-manager = {
@@ -95,12 +101,11 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-       librewolf
-       git
-       wl-clipboard
+      librewolf
+      git
+      wl-clipboard
     ];
 
- 
     system.stateVersion = "25.11";
   };
 }

@@ -14,15 +14,14 @@
   };
 
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} (
       let
         modules = inputs.import-tree ./modules;
         hosts = inputs.import-tree ./hosts;
-      in
-      {
+      in {
         imports = modules.imports ++ hosts.imports;
 
-        perSystem = { pkgs, ... }: {
+        perSystem = {pkgs, ...}: {
           formatter = pkgs.alejandra;
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
@@ -32,6 +31,6 @@
             ];
           };
         };
-    }
-  );
+      }
+    );
 }
