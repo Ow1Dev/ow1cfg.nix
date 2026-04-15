@@ -23,10 +23,12 @@
         imports = modules.imports ++ hosts.imports;
 
         perSystem = { pkgs, ... }: {
+          formatter = pkgs.alejandra;
           devShells.default = pkgs.mkShell {
-            packages = [
-              pkgs.lua-language-server
-              pkgs.nixd
+            packages = with pkgs; [
+              lua-language-server
+              alejandra
+              nixd
             ];
           };
         };
