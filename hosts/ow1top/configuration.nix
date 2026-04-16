@@ -78,10 +78,13 @@
       isNormalUser = true;
       description = "Mads Bruun Jensen";
       extraGroups = ["networkmanager" "wheel"];
+      shell = pkgs.zsh;
       packages = with pkgs; [
         kdePackages.kate
       ];
     };
+
+    programs.zsh.enable = true;
 
     # Move it somewhere else
     home-manager = {

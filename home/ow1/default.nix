@@ -9,6 +9,7 @@
     ./git.nix
 
     ../common/terminal/ghostty.nix
+    ../common/shell/zsh.nix
   ];
 
   home.packages = with pkgs; [
