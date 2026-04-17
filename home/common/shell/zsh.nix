@@ -6,27 +6,16 @@
     enableCompletion = true;
 
     initContent = ''
-      # Completion (only once!)
       autoload -Uz compinit
       compinit
 
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
       setopt PROMPT_SUBST
 
-      # vcs_info setup (fast git info)
-      autoload -Uz vcs_info
-      precmd_functions+=(vcs_info)
-
-      zstyle ':vcs_info:git:*' enable yes
-      zstyle ':vcs_info:git:*' formats ' (%b)'
-      zstyle ':vcs_info:git:*' actionformats ' (%b|%a)'
-      zstyle ':vcs_info:git:*' check-for-changes true
-      zstyle ':vcs_info:git:*' unstagedstr '*'
-      zstyle ':vcs_info:git:*' stagedstr '+'
-
-      # Colors (zsh-native)
       autoload -Uz colors && colors
+
+      parse_git_branch() {
+        git rev-parse --abbrev-ref HEAD 2>/dev/null
+      }
 
       in_nix() {
         [[ -n "$IN_NIX_SHELL" ]] && echo "  "
@@ -35,14 +24,40 @@
       get_path() {
         local path="$PWD"
 
+        if git rev-parse --is-inside-work-tree &>/dev/null; then
+          local root
+          root=$(git rev-parse --show-superproject-working-tree 2>/dev/null)
+
+          # fallback if not submodule
+          if [[ -z "$root" ]]; then
+            root=$(git rev-parse --show-toplevel 2>/dev/null)
+          fi
+
+          local rel="''${path#$root}"
+          rel="''${rel#/}"
+
+          if [[ -z "$rel" ]]; then
+            echo "$(basename "$root")"
+          else
+            echo "$(basename "$root")/''${rel}"
+          fi
+          return
+        fi
+
         if [[ "$path" == "$HOME"* ]]; then
-          echo "''${path#$HOME}"
+          echo "~''${path#$HOME}"
         else
           echo "$path"
         fi
       }
 
-      PROMPT='%{$fg[blue]%}$(in_nix)%~%{$fg[green]%}''${vcs_info_msg_0_} %{$fg[grey]%}$ %{$reset_color%}'
+      get_git_branch() {
+        local b
+        b=$(parse_git_branch)
+        [[ -n "$b" ]] && echo " (''${b})"
+      }
+
+      PROMPT='%{$fg[blue]%}$(in_nix)$(get_path)%{$fg[green]%}$(get_git_branch) %{$fg[grey]%}$ %{$reset_color%}'
 
       bindkey -e
     '';
