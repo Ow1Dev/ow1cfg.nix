@@ -18,6 +18,8 @@
   home.packages = with pkgs; [
     # my neovim config
     self.packages.${stdenv.hostPlatform.system}.neovim
+
+    opencode
   ];
 
   home.stateVersion = "25.11";
