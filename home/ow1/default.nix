@@ -13,6 +13,9 @@
     ../common/shell/zsh.nix
 
     ../common/tools/tmux.nix
+    ../common/tools/zoxide.nix
+
+    ../common/tools/sesh-television.nix
   ];
 
   home.packages = with pkgs; [
