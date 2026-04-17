@@ -85,6 +85,8 @@
     };
 
     programs.zsh.enable = true;
+    programs.localsend.enable = true;
+
 
     # Move it somewhere else
     home-manager = {
