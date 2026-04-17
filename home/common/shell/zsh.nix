@@ -29,8 +29,10 @@
         local root
         root=$(parse_git_root)
         [[ -n "$root" ]] && echo "$PWD" | sed "s|^$root|$(basename "$root")|; s|^/||" && return
-        (exit 1)
-        [[ "$PWD" == "$HOME"* ]] 2>/dev/null && echo "~''${PWD#$HOME}" || echo "$PWD"
+        case "$PWD" in
+          ''${HOME}*) echo "~''${PWD#$HOME}" ;;
+          *) echo "$PWD"
+        esac
       }
 
       PROMPT='%F{blue}$(in_nix)$(get_path)%F{green}$(b=$(parse_git_branch); [[ -n "$b" ]] && echo " ($b)") %F{8}$ %f'
