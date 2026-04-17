@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{...}: {
   programs.zsh = {
     enable = true;
 
     autosuggestion.enable = true;
     enableCompletion = true;
+
+    shellAliases = {
+      lg = "lazygit";
+    };
 
     initContent = ''
       autoload -Uz compinit

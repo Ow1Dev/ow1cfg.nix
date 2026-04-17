@@ -14,6 +14,7 @@
 
     ../common/tools/tmux.nix
     ../common/tools/zoxide.nix
+    ../common/tools/direnv.nix
 
     ../common/tools/sesh-television.nix
   ];
@@ -23,6 +24,7 @@
     self.packages.${stdenv.hostPlatform.system}.neovim
 
     opencode
+    lazygit
   ];
 
   home.stateVersion = "25.11";
