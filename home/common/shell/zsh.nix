@@ -7,6 +7,7 @@
 
     shellAliases = {
       lg = "lazygit";
+      wt = "git worktree";
     };
 
     initContent = ''
