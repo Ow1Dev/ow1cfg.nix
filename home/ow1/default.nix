@@ -9,6 +9,7 @@
     ./git.nix
 
     ../common/terminal/ghostty.nix
+    ../common/browser/librewolf.nix
 
     ../common/shell/zsh.nix
 
@@ -23,6 +24,7 @@
     # my neovim config
     self.packages.${stdenv.hostPlatform.system}.neovim
 
+    # opencode from overlay
     opencode
     lazygit
   ];

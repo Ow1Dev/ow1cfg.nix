@@ -11,6 +11,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Track the dev branch for latest opencode (1.14.x)
+    opencode.url = "github:anomalyco/opencode/dev";
   };
 
   outputs = inputs:
@@ -21,7 +24,15 @@
       in {
         imports = modules.imports ++ hosts.imports;
 
-        perSystem = {pkgs, ...}: {
+        perSystem = { pkgs, system, ... }: {
+          # Reconstruct pkgs with overlays so consumers get pkgs.opencode
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              (inputs.opencode.overlays.default or (final: prev: {}))
+            ];
+          };
+
           formatter = pkgs.alejandra;
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [

@@ -106,7 +106,6 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-      librewolf
       git
       wl-clipboard
       nerd-fonts.jetbrains-mono
