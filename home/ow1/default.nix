@@ -27,6 +27,7 @@
     # opencode from overlay
     opencode
     lazygit
+    gh
   ];
 
   home.stateVersion = "25.11";
