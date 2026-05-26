@@ -1,5 +1,5 @@
-{ inputs, pkgs, ... }: {
+{ self, pkgs, ... }: {
   home.packages = [
-    inputs.helium.packages.${pkgs.system}.default
+    self.inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
