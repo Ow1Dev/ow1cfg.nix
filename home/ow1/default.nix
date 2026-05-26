@@ -10,6 +10,7 @@
 
     ../common/terminal/ghostty.nix
     ../common/browser/librewolf.nix
+    ../common/browser/helium.nix
 
     ../common/shell/zsh.nix
 

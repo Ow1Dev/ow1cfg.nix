@@ -14,6 +14,11 @@
 
     # Track the dev branch for latest opencode (1.14.x)
     opencode.url = "github:anomalyco/opencode/dev";
+
+    helium = {
+      url = "github:AlvaroParker/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:

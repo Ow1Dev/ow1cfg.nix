@@ -77,7 +77,7 @@
     users.users.ow1 = {
       isNormalUser = true;
       description = "Mads Bruun Jensen";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "docker"];
       shell = pkgs.zsh;
       packages = with pkgs; [
         kdePackages.kate
@@ -110,6 +110,8 @@
       wl-clipboard
       nerd-fonts.jetbrains-mono
     ];
+
+    virtualisation.docker.enable = true;
 
     system.stateVersion = "25.11";
   };
