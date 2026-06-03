@@ -19,14 +19,13 @@
     ../common/tools/direnv.nix
 
     ../common/tools/sesh-television.nix
+    ../common/tools/opencode.nix
   ];
 
   home.packages = with pkgs; [
     # my neovim config
     self.packages.${stdenv.hostPlatform.system}.neovim
 
-    # opencode from overlay
-    opencode
     lazygit
     gh
   ];
