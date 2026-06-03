@@ -6,6 +6,7 @@ require "mini.completion".setup()
 vim.lsp.enable({
   "tsserver",
 	"lua_ls",
+	"gopls",
 	"nixd",
 })
 
