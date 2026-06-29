@@ -7,7 +7,7 @@
     packages.neovim = inputs.wrapper-modules.wrappers.neovim.wrap {
       inherit pkgs;
       settings.config_directory = ./.;
-      extraPackages = with pkgs; [
+      runtimePkgs = with pkgs; [
         ripgrep
         tree-sitter
         gcc

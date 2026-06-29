@@ -9,7 +9,7 @@
     ./git.nix
 
     ../common/terminal/ghostty.nix
-    ../common/browser/librewolf.nix
+    # ../common/browser/librewolf.nix
     ../common/browser/helium.nix
 
     ../common/shell/zsh.nix
@@ -28,6 +28,7 @@
 
     lazygit
     gh
+    devenv
   ];
 
   home.stateVersion = "25.11";
