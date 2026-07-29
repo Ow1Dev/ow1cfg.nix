@@ -20,6 +20,7 @@
 
     ../common/tools/sesh-television.nix
     ../common/tools/opencode.nix
+    ../common/tools/pi.nix
   ];
 
   home.packages = with pkgs; [
@@ -27,6 +28,7 @@
     self.packages.${stdenv.hostPlatform.system}.neovim
 
     lazygit
+    herdr
     gh
     devenv
   ];
