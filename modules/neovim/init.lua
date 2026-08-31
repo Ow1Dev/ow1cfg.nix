@@ -18,6 +18,7 @@ vim.pack.add {
 vim.cmd.colorscheme("nordic")
 
 require "user.options"
+require "user.keymaps"
 require "user.mini"
 require "user.lualine"
 require "user.lsp"

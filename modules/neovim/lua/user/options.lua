@@ -1,6 +1,11 @@
 -- ============================================================================
 -- OPTIONS
 -- ============================================================================
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+
 vim.opt.number = true -- line number
 vim.opt.relativenumber = true -- relative line numbers
 vim.opt.cursorline = true -- highlight current line
