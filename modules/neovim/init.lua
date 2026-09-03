@@ -13,6 +13,9 @@ vim.pack.add {
 
   -- CMP & LSP
   'https://github.com/neovim/nvim-lspconfig',
+
+  -- Markdown
+  'https://github.com/meanderingprogrammer/render-markdown.nvim',
 }
 
 vim.cmd.colorscheme("nordic")
