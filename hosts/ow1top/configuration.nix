@@ -5,7 +5,6 @@
 }: {
   flake.nixosModules.ow1topConfiguration = {
     pkgs,
-    lib,
     ...
   }: {
     # import any other modules from here
@@ -72,6 +71,22 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
+    # In your NixOS configuration
+    programs.nix-ld.enable = true;
+
+    # Optional: preload common libraries
+    #programs.nix-ld.libraries = with pkgs; [
+    #  stdenv.cc.cc.lib  # libstdc++
+    #  zlib
+    #  openssl
+    #  icu
+    #];
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.ow1 = {

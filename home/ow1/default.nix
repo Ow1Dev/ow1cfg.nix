@@ -22,6 +22,8 @@
     ../common/tools/opencode.nix
   ];
 
+  home.sessionVariables.SSL_CERT_DIR = "$HOME/.aspnet/dev-certs/trust:/etc/ssl/certs";
+
   home.packages = with pkgs; [
     # my neovim config
     self.packages.${stdenv.hostPlatform.system}.neovim
@@ -30,6 +32,8 @@
     herdr
     gh
     devenv
+
+    spotify
   ];
 
   home.stateVersion = "25.11";

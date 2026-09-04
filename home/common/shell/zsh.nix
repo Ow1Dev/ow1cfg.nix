@@ -14,6 +14,8 @@
       autoload -Uz compinit
       compinit
 
+      export SSL_CERT_DIR="$SSL_CERT_DIR:/home/ow1/.aspnet/dev-certs/trust"
+
       setopt PROMPT_SUBST
 
       autoload -Uz colors && colors

@@ -1,10 +1,26 @@
+-- Diagnostics
+vim.diagnostic.config({
+	virtual_lines = false,
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		focusable = false,
+		header = "",
+		prefix = "",
+	},
+})
+
 -- CMP
 require "mini.completion".setup()
 
 -- LSP
 
 vim.lsp.enable({
-  "tsserver",
+  "ts_ls",
 	"lua_ls",
 	"gopls",
 	"nixd",
