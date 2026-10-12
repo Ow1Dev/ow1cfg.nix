@@ -3,10 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.ow1topConfiguration = {
-    pkgs,
-    ...
-  }: {
+  flake.nixosModules.ow1topConfiguration = {pkgs, ...}: {
     # import any other modules from here
     imports = [
       self.nixosModules.ow1topHardware

@@ -5,7 +5,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 
-
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
     home-manager = {
@@ -32,7 +31,11 @@
       in {
         imports = modules.imports ++ hosts.imports;
 
-        perSystem = { pkgs, system, ... }: {
+        perSystem = {
+          pkgs,
+          system,
+          ...
+        }: {
           # Reconstruct pkgs with overlays so consumers get pkgs.opencode
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
