@@ -24,6 +24,7 @@ vim.lsp.enable({
 	"lua_ls",
 	"gopls",
 	"nixd",
+	"rust_analyzer",
 })
 
 local function lsp_on_attach(ev)
@@ -41,7 +42,7 @@ local function lsp_on_attach(ev)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", { callback = lsp_on_attach })

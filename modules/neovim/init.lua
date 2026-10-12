@@ -13,6 +13,7 @@ vim.pack.add {
 
   -- CMP & LSP
   'https://github.com/neovim/nvim-lspconfig',
+  'https://github.com/j-hui/fidget.nvim',
 
   -- Markdown
   'https://github.com/meanderingprogrammer/render-markdown.nvim',
@@ -26,3 +27,4 @@ require "user.mini"
 require "user.lualine"
 require "user.lsp"
 require "user.treesitter"
+require "user.fidget"

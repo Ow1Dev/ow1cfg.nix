@@ -11,10 +11,15 @@
     };
 
     initContent = ''
+      bindkey -v
+
       autoload -Uz compinit
       compinit
 
+      export SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
       export SSL_CERT_DIR="$SSL_CERT_DIR:/home/ow1/.aspnet/dev-certs/trust"
+      export EDITOR="nvim"
+      export VISUAL="nvim"
 
       setopt PROMPT_SUBST
 
@@ -44,7 +49,6 @@
 
       PROMPT='%F{blue}$(in_nix)$(get_path)%F{green}$(b=$(parse_git_branch); [[ -n "$b" ]] && echo " ($b)") %F{8}$ %f'
 
-      bindkey -e
     '';
   };
 }

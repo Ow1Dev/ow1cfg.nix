@@ -13,6 +13,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvim.url = "git+https://github.com/Ow1Dev/Ow1Nvim";
+
     # Track the dev branch for latest opencode (1.14.x)
     opencode.url = "github:anomalyco/opencode/dev";
 

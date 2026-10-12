@@ -1,18 +1,5 @@
-{
-  self,
-  inputs,
-  ...
-}: {
-  perSystem = {pkgs, ...}: {
-    packages.neovim = inputs.wrapper-modules.wrappers.neovim.wrap {
-      inherit pkgs;
-      settings.config_directory = ./.;
-      runtimePkgs = with pkgs; [
-        ripgrep
-        tree-sitter
-        gcc
-        gnumake
-      ];
-    };
+{ ... }: {
+  perSystem = {inputs', ...}: {
+    packages.nvim = inputs'.nvim.packages.default;
   };
 }

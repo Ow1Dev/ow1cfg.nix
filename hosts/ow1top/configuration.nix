@@ -102,6 +102,7 @@
     programs.zsh.enable = true;
     programs.localsend.enable = true;
 
+    security.pki.installCACerts = true;
 
     # Move it somewhere else
     home-manager = {
@@ -125,6 +126,11 @@
       wl-clipboard
       nerd-fonts.jetbrains-mono
     ];
+
+    environment.variables = {
+      SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+      NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+    };
 
     virtualisation.docker.enable = true;
 
