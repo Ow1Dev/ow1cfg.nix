@@ -1,0 +1,3 @@
+[submodule "modules/features/nvim/config"]
+	path = modules/features/nvim/config
+	url = https://github.com/Ow1Dev/Ow1Nvim

@@ -77,7 +77,7 @@ PanelWindow {
         } else if (expanded) {
             const url = nixSearch
                 ? "https://search.nixos.org/packages" + (webQuery ? "?query=" + encodeURIComponent(webQuery) : "")
-                : "https://www.google.com/search?q=" + encodeURIComponent(webQuery);
+                : "https://duckduckgo.com/?q=" + encodeURIComponent(webQuery);
             Qt.openUrlExternally(url);
         } else return;
         visible = false;
