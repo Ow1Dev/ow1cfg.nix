@@ -1,3 +1,4 @@
+import "../core"
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -11,7 +12,8 @@ Segment {
     property ShellScreen screen: null
     property var tags: []
 
-    spacing: 7
+    spacing: 3
+    horizontalPadding: 8
 
     function viewTag(index) {
         dispatch.command = ["mmsg", "dispatch", `view,${index},0`];
@@ -61,12 +63,12 @@ Segment {
             required property var modelData
             readonly property bool active: modelData.is_active === true
 
-            implicitWidth: active ? 16 : 5
+            implicitWidth: active ? 16 : 6
             implicitHeight: root.implicitHeight
 
             Behavior on implicitWidth {
                 NumberAnimation {
-                    duration: 150
+                    duration: 180
                     easing.type: Easing.OutCubic
                 }
             }
@@ -74,18 +76,18 @@ Segment {
             Rectangle {
                 anchors.centerIn: parent
                 width: dot.implicitWidth
-                height: dot.active ? 6 : 5
+                height: 6
                 radius: height / 2
                 color: dot.active ? Nord.accent : (hover.containsMouse ? Nord.fg : Nord.muted)
 
                 Behavior on height {
                     NumberAnimation {
-                        duration: 150
+                        duration: 180
                     }
                 }
                 Behavior on color {
                     ColorAnimation {
-                        duration: 150
+                        duration: 180
                     }
                 }
             }

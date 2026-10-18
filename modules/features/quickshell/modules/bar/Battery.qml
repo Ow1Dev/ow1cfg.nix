@@ -1,3 +1,4 @@
+import "../core"
 import QtQuick
 import Quickshell.Services.UPower
 

@@ -1,8 +1,7 @@
-singleton Nord 1.0 Nord.qml
 Bar 1.0 Bar.qml
 Capsule 1.0 Capsule.qml
 Segment 1.0 Segment.qml
-Launcher 1.0 Launcher.qml
+LauncherButton 1.0 LauncherButton.qml
 Workspaces 1.0 Workspaces.qml
 Clock 1.0 Clock.qml
 Battery 1.0 Battery.qml

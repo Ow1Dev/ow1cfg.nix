@@ -1,3 +1,4 @@
+import "../core"
 import QtQuick
 
 // .s.clock[data-fmt="day"] — "Sat 14:32", ticking every second.

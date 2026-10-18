@@ -1,3 +1,4 @@
+import "../core"
 import QtQuick
 import Quickshell
 
@@ -5,6 +6,7 @@ import Quickshell
 // centered capsule holding launcher | workspaces | clock | battery.
 PanelWindow {
     id: root
+    signal launcherRequested()
 
     anchors {
         top: true
@@ -13,15 +15,22 @@ PanelWindow {
     }
 
     implicitHeight: 35
-    color: "transparent"
+    color: Nord.barBg
 
     // .bar.nd-a — rgba(46,52,64,.92) (blur comes from mango's blur_layer=1)
+
+    Rectangle {
+        anchors.bottom: parent.bottom
+        width: parent.width
+        height: 1
+        color: Nord.barBorder
+    }
 
     Capsule {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 
-        Launcher {}
+        LauncherButton { onActivated: root.launcherRequested() }
         Workspaces {
             divider: true
             screen: root.screen

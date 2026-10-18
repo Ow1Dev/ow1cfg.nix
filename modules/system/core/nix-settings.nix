@@ -7,6 +7,7 @@
       };
       unstablePkgs = import inputs.nixpkgs-unstable {
         inherit system;
+        config.allowUnfree = true;
       };
       # Make flakeLocation universally addressable
       flakeLocation = builtins.getEnv "PWD";

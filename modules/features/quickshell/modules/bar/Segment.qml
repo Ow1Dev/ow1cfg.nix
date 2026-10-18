@@ -1,15 +1,17 @@
+import "../core"
 import QtQuick
 import QtQuick.Layouts
 
-// .seg > .s — one capsule segment: optional left divider + 12px side padding.
+// .seg > .s — one capsule segment: optional left divider + 11px side padding.
 Item {
     id: root
 
     property bool divider: false
+    property int horizontalPadding: 11
     property alias spacing: container.spacing
     default property alias content: container.data
 
-    implicitWidth: sep.width + container.implicitWidth + 24
+    implicitWidth: sep.width + container.implicitWidth + horizontalPadding * 2
     implicitHeight: 24
 
     Rectangle {
@@ -22,7 +24,7 @@ Item {
 
     RowLayout {
         id: container
-        x: sep.width + 12
+        x: sep.width + root.horizontalPadding
         anchors.verticalCenter: parent.verticalCenter
         spacing: 6
     }

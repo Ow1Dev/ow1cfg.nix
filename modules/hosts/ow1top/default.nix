@@ -8,6 +8,7 @@
       desktop
       ow1topConfiguration
       development
+      chatgpt
     ];
   };
 }

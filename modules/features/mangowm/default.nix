@@ -45,11 +45,17 @@
         blur = 1;
         blur_layer = 1;
 
+        # Keep background colors from bleeding into the launcher’s rounded edge.
+        layer_rule = [
+          "layer_name:^nord-launcher$,no_blur:1"
+        ];
+
         bind =
           [
             "SUPER,r,reload_config"
 
             "SUPER,Return,spawn,foot"
+            "ALT,d,spawn,${pkgs.lib.getExe self'.packages.quickshell} ipc call launcher toggle"
 
             "SUPER,h,focusdir,left"
             "SUPER,l,focusdir,right"
