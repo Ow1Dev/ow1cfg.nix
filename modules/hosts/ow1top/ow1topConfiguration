@@ -1,0 +1,16 @@
+{...}: {
+  flake.nixosModules.hackstationConfiguration = {pkgs, ...}: {
+    virtualisation.docker = {
+      enable = true;
+    };
+    networking = {
+      interfaces.enp5s0.wakeOnLan.enable = true;
+      hostName = "HACKSTATION";
+    };
+    environment.systemPackages = with pkgs; [
+      tor-browser
+      tor
+    ];
+  };
+}
+
