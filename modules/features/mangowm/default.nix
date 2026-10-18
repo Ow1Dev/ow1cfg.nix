@@ -67,7 +67,7 @@
             "SUPER+SHIFT,h,exchange_client,left"
             "SUPER+SHIFT,l,exchange_client,right"
 
-            "SUPER,f,togglefullscreen"
+            "SUPER,f,togglemaximizescreen"
             "SUPER,space,togglefloating"
 
             "SUPER+SHIFT,q,quit"

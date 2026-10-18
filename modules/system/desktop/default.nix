@@ -7,5 +7,12 @@
     modules = with self.nixosModules; [core mangowm sddm foot network quickshell];
   in {
     imports = modules;
+
+    # System defaults; a browser chosen in the user's settings takes precedence.
+    xdg.mime.defaultApplications = {
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+    };
   });
 }
