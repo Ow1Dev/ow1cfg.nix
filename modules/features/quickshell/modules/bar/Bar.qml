@@ -16,10 +16,6 @@ PanelWindow {
     color: "transparent"
 
     // .bar.nd-a — rgba(46,52,64,.92) (blur comes from mango's blur_layer=1)
-    Rectangle {
-        anchors.fill: parent
-        color: Nord.barBg
-    }
 
     Capsule {
         anchors.horizontalCenter: parent.horizontalCenter
