@@ -45,31 +45,32 @@
         blur = 1;
         blur_layer = 1;
 
-        bind = [
-          "SUPER,r,reload_config"
+        bind =
+          [
+            "SUPER,r,reload_config"
 
-          "SUPER,Return,spawn,foot"
+            "SUPER,Return,spawn,foot"
 
-          "SUPER,h,focusdir,left"
-          "SUPER,l,focusdir,right"
-          "SUPER,k,focusdir,up"
-          "SUPER,j,focusdir,down"
+            "SUPER,h,focusdir,left"
+            "SUPER,l,focusdir,right"
+            "SUPER,k,focusdir,up"
+            "SUPER,j,focusdir,down"
 
-          "SUPER+SHIFT,k,exchange_client,up"
-          "SUPER+SHIFT,j,exchange_client,down"
-          "SUPER+SHIFT,h,exchange_client,left"
-          "SUPER+SHIFT,l,exchange_client,right"
+            "SUPER+SHIFT,k,exchange_client,up"
+            "SUPER+SHIFT,j,exchange_client,down"
+            "SUPER+SHIFT,h,exchange_client,left"
+            "SUPER+SHIFT,l,exchange_client,right"
 
-          "SUPER,f,togglefullscreen"
-          "SUPER,space,togglefloating"
+            "SUPER,f,togglefullscreen"
+            "SUPER,space,togglefloating"
 
-          "SUPER+SHIFT,q,quit"
-          "SUPER,q,killclient"
-        ]
-        ++ builtins.concatMap (i: [
-          "SUPER,${toString i},view,${toString i},0"
-          "SUPER+SHIFT,${toString i},tag,${toString i},0"
-        ]) (builtins.genList (i: i + 1) 5);
+            "SUPER+SHIFT,q,quit"
+            "SUPER,q,killclient"
+          ]
+          ++ builtins.concatMap (i: [
+            "SUPER,${toString i},view,${toString i},0"
+            "SUPER+SHIFT,${toString i},tag,${toString i},0"
+          ]) (builtins.genList (i: i + 1) 5);
 
         mousebind = [
           "SUPER,btn_left,moveresize,curmove"
