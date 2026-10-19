@@ -5,7 +5,7 @@ Segment {
     id: root
     signal activated()
     Text {
-        text: "❄"
+        text: ""
         color: hover.containsMouse ? Nord.accent : Nord.fg
         font.pixelSize: 14
     }

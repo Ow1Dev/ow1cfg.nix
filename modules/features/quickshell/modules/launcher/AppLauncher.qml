@@ -94,8 +94,8 @@ PanelWindow {
         clip: true
         radius: expanded ? 20 : 22
         color: expanded ? Nord.launcherBg : Nord.pill
-        border.width: root.expanded ? 1 : 0
-        border.color: Nord.launcherBorder
+        border.width: 1
+        border.color: root.expanded ? Nord.launcherBorder : Nord.compactBorder
 
         ColumnLayout {
             id: content

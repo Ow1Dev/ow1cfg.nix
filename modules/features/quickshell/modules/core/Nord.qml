@@ -1,7 +1,7 @@
 pragma Singleton
 import QtQuick
 
-// Nord palette, matching bar-and-app-launcher.html
+// Nord palette, matching nord-desktop-bar.html
 QtObject {
     readonly property color barBg: "#eb2e3440" // nord0 @ 92% (bar, blurred)
     readonly property color pill: "#3b4252" // nord1 (capsule)

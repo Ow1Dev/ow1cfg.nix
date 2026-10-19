@@ -4,13 +4,15 @@
   ...
 }: {
   flake.nixosModules.quickshell = moduleWithSystem (
-    {self'}: {
+    {self', pkgs, ...}: {
       environment.systemPackages = with self'.packages; [
         quickshell
+        pkgs.swaylock
       ];
 
       # Battery segment in the bar
       services.upower.enable = true;
+      security.pam.services.swaylock = {};
     }
   );
   perSystem = {pkgs, ...}: {

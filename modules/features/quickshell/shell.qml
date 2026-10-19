@@ -1,4 +1,6 @@
 import "modules/bar"
+import "modules/session"
+import "modules/notifications"
 import "modules/launcher"
 import QtQuick
 import Quickshell
@@ -49,9 +51,15 @@ Scope {
             property alias launcher: appLauncher
 
             Bar {
+                id: bar
                 screen: modelData
-                onLauncherRequested: shell.toggleOnMonitor(modelData.name)
+                unread: NotificationState.unread
+                onLauncherRequested: { sessionMenu.visible = false; notifications.opened = false; shell.toggleOnMonitor(modelData.name); }
+                onNotificationsRequested: { appLauncher.visible = false; sessionMenu.visible = false; notifications.opened = !notifications.opened; }
+                onPowerRequested: { appLauncher.visible = false; notifications.opened = false; sessionMenu.visible = !sessionMenu.visible; }
             }
+            SessionMenu { id: sessionMenu; screen: modelData; anchorRight: bar.capsuleRight - 3 }
+            NotificationPanel { id: notifications; screen: modelData }
             AppLauncher {
                 id: appLauncher
                 screen: modelData

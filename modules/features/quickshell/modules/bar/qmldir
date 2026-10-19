@@ -5,3 +5,5 @@ LauncherButton 1.0 LauncherButton.qml
 Workspaces 1.0 Workspaces.qml
 Clock 1.0 Clock.qml
 Battery 1.0 Battery.qml
+BarButton 1.0 BarButton.qml
+Network 1.0 Network.qml
