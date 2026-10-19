@@ -4,12 +4,29 @@
   ...
 }: {
   flake.nixosModules.mangowm = moduleWithSystem (
-    {self'}: {
+    {
+      self',
+      pkgs,
+      ...
+    }: {
       imports = [inputs.mangowm.nixosModules.mango];
 
       programs.mango = {
         enable = true;
         package = self'.packages.mangowc;
+      };
+
+      environment.systemPackages = with pkgs; [
+        grim
+        slurp
+        wl-clipboard
+        feh
+      ];
+
+      xdg.portal = {
+        enable = true;
+        wlr.enable = true;
+        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
 
       services.xserver.enable = true;
@@ -21,6 +38,18 @@
     self',
     ...
   }: {
+    packages.screenshot = pkgs.writeShellScriptBin "mango-screenshot" ''
+      set -eu
+      mkdir -p "$HOME/Pictures/Screenshots"
+      output="$HOME/Pictures/Screenshots/$(date +%Y%m%d%H%M%S).png"
+      if [ "''${1-}" = --area ]; then
+        geometry=$(${pkgs.lib.getExe pkgs.slurp} -d)
+        [ -n "$geometry" ] || exit 0
+        exec ${pkgs.lib.getExe pkgs.grim} -g "$geometry" "$output"
+      fi
+      exec ${pkgs.lib.getExe pkgs.grim} "$output"
+    '';
+
     packages.mangowc = inputs.wrappers.wrappers.mangowc.wrap {
       inherit pkgs;
 
@@ -44,6 +73,7 @@
         # Frosted layer surfaces (bar background)
         blur = 1;
         blur_layer = 1;
+        blur_optimized = 0;
 
         # Keep background colors from bleeding into the launcher’s rounded edge.
         layer_rule = [
@@ -53,6 +83,8 @@
         bind =
           [
             "SUPER,r,reload_config"
+            "SHIFT,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot} --area"
+            "NONE,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot}"
 
             "SUPER,Return,spawn,foot"
             "ALT,d,spawn,${pkgs.lib.getExe self'.packages.quickshell} ipc call launcher toggle"
