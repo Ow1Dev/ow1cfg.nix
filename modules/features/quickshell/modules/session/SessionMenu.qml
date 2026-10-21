@@ -1,3 +1,4 @@
+import "../Icons" as Icons
 import "../core"
 import QtQuick
 import QtQuick.Layouts
@@ -33,7 +34,7 @@ PanelWindow {
         Rectangle {
             id: menu
             x: Math.max(12, Math.min(parent.width - width - 12, root.anchorRight - width))
-            y: 53
+            y: Nord.barHeight
             width: 232
             height: menuContent.implicitHeight + 16
             radius: 14
@@ -75,10 +76,10 @@ PanelWindow {
                             Rectangle {
                                 width: 20; height: 20; radius: 6
                                 color: entry.index === 3 ? "#28bf616a" : Nord.pillHover
-                                Text { anchors.centerIn: parent; text: ["⌑", "⇥", "↻", "⏻"][entry.index]; color: entry.index === 3 ? "#e3a1a7" : Nord.accent; font.pixelSize: 11 }
+                                Icons.Icon { anchors.centerIn: parent; width: 13; height: 13; name: ["lock", "logout", "restart", "power"][entry.index]; color: entry.index === 3 ? "#e3a1a7" : Nord.accent }
                             }
                             Text { Layout.fillWidth: true; text: entry.modelData; color: entry.index === 3 ? "#e3a1a7" : Nord.text; font { pixelSize: 10; bold: true } }
-                            Text { text: entry.index === 3 ? "›" : ""; color: Nord.hint; font.pixelSize: 12 }
+                            Icons.Icon { visible: entry.index === 3; name: "chevron-right"; implicitWidth: 12; implicitHeight: 12; color: Nord.hint }
                         }
                         MouseArea {
                             id: hover
@@ -108,7 +109,7 @@ PanelWindow {
                 ColumnLayout {
                     anchors { fill: parent; margins: 18 }
                     spacing: 8
-                    Text { Layout.alignment: Qt.AlignHCenter; text: "⏻"; color: "#e3a1a7"; font.pixelSize: 25 }
+                    Icons.Icon { Layout.alignment: Qt.AlignHCenter; implicitWidth: 25; implicitHeight: 25; name: root.pendingAction === "Log out" ? "logout" : root.pendingAction === "Restart" ? "restart" : "power"; color: "#e3a1a7" }
                     Text { Layout.alignment: Qt.AlignHCenter; text: root.pendingAction + "?"; color: Nord.fg; font { pixelSize: 13; bold: true } }
                     Text { Layout.fillWidth: true; text: "Unsaved work may be lost."; horizontalAlignment: Text.AlignHCenter; color: Nord.secondary; font.pixelSize: 10 }
                     RowLayout {

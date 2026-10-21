@@ -6,8 +6,8 @@ Segment {
     signal activated()
     Text {
         text: ""
-        color: hover.containsMouse ? Nord.accent : Nord.fg
         font.pixelSize: 14
+        color: hover.containsMouse ? Nord.accent : Nord.fg
     }
     MouseArea {
         id: hover

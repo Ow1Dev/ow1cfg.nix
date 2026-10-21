@@ -2,7 +2,7 @@ import "../core"
 import QtQuick
 import Quickshell
 
-// Scale the reference capsule by 1.5, including typography and pointer targets.
+// Scale the capsule, typography and pointer targets together.
 PanelWindow {
     id: root
     signal launcherRequested()
@@ -17,7 +17,7 @@ PanelWindow {
         right: true
     }
 
-    implicitHeight: 53
+    implicitHeight: Nord.barHeight
     color: "transparent"
 
     Rectangle {
@@ -29,7 +29,7 @@ PanelWindow {
 
     Capsule {
         id: capsule
-        scale: 1.5
+        scale: Nord.barScale
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 

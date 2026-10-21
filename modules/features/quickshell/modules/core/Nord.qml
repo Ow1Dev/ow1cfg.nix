@@ -3,6 +3,11 @@ import QtQuick
 
 // Nord palette, matching nord-desktop-bar.html
 QtObject {
+    // Change only barScale to resize the pill, contents and surrounding spacing.
+    // 1.0 = original 24px pill; 1.25 = 30px pill.
+    readonly property real barScale: 1.25
+    readonly property int barHeight: Math.round(35 * barScale)
+
     readonly property color barBg: "#eb2e3440" // nord0 @ 92% (bar, blurred)
     readonly property color pill: "#3b4252" // nord1 (capsule)
     readonly property color pillHover: "#434c5e" // nord2
@@ -14,10 +19,11 @@ QtObject {
     readonly property color bat: "#a3be8c" // nord14 (battery ok)
     readonly property color batLow: "#bf616a" // nord11 (battery low)
     readonly property color barBorder: "#0ceceff4"
-    readonly property color capsuleBorder: "#08ffffff"
+    readonly property color surfaceBorder: launcherBorder // Match the launcher search field
+    readonly property color capsuleBorder: surfaceBorder
     readonly property color launcherBg: "#f72e3440"
     readonly property color launcherBorder: "#4c566a"
-    readonly property color compactBorder: "#12ffffff"
+    readonly property color compactBorder: surfaceBorder
     readonly property color secondary: "#b8c2ce"
     readonly property color hint: "#8995a7"
     readonly property color placeholder: "#8ac4cedb"

@@ -1,8 +1,9 @@
+import "../Icons" as Icons
 import "../core"
 import QtQuick
 import Quickshell.Services.UPower
 
-// .s.bat — css-drawn battery shell + nub, ⚡ when charging, red when low.
+// SVG battery outline with live charge fill and charging indicator.
 // Hidden entirely on machines without a laptop battery.
 Segment {
     id: root
@@ -16,45 +17,29 @@ Segment {
     visible: device.isLaptopBattery
     spacing: 7
 
-    // .bolt
-    Text {
-        visible: root.charging
-        text: "⚡"
-        color: Nord.fg
-        font.pixelSize: 10
-    }
-
-    // .bshell + ::after nub
     Item {
         implicitWidth: 24
-        implicitHeight: 10
-
-        Rectangle {
-            width: 20
-            height: 10
-            radius: 3.5
-            color: "transparent"
-            border.width: 1.5
-            border.color: root.batColor
-
-            // .bfill
-            Rectangle {
-                x: 1.5
-                y: 1.5
-                height: 7
-                width: 17 * root.pct / 100
-                radius: 1.5
-                color: root.batColor
-            }
-        }
-
-        Rectangle {
-            x: 21.5
-            y: 3
-            width: 2
-            height: 4
-            radius: 1
+        implicitHeight: 16
+        Icons.Icon {
+            renderScale: Nord.barScale
+            anchors.fill: parent
+            name: "battery"
             color: root.batColor
+        }
+        // Keep the fill proportional to the actual battery percentage.
+        Rectangle {
+            x: 3; y: 5.5
+            width: 15 * root.pct / 100
+            height: 5; radius: 1
+            color: root.batColor
+        }
+        Icons.BoltIcon {
+            visible: root.charging
+            // Match the visible battery outline, including the path's inset.
+            x: 4.25; y: 1.25
+            width: 13.5; height: 13.5
+            color: Nord.pill
+            fillColor: Nord.fg
         }
     }
 

@@ -1,3 +1,4 @@
+import "../Icons" as Icons
 import "../core"
 import QtQuick
 import Quickshell.Io
@@ -26,16 +27,11 @@ Item {
         }
     }
     Timer { interval: 10000; running: true; repeat: true; onTriggered: { status.running = true; wifi.running = true; } }
-    Row {
+    Icons.NetworkBars {
+        renderScale: Nord.barScale
         anchors.centerIn: parent
-        spacing: 2
-        Repeater {
-            model: 4
-            Rectangle {
-                required property int index
-                width: 3; height: 4 + index * 3; y: 13 - height; radius: 1
-                color: root.connected && root.strength > index * 25 ? Nord.bat : Nord.pillHover
-            }
-        }
+        strength: root.connected ? Math.max(1, Math.min(4, Math.ceil(root.strength / 25))) : 0
+        inactiveColor: Nord.pillHover
+        color: root.connected ? Nord.bat : Nord.hint
     }
 }

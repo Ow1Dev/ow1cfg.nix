@@ -1,3 +1,4 @@
+import "../Icons" as Icons
 import "../core"
 import QtQuick
 import QtQuick.Layouts
@@ -95,7 +96,7 @@ PanelWindow {
         radius: expanded ? 20 : 22
         color: expanded ? Nord.launcherBg : Nord.pill
         border.width: 1
-        border.color: root.expanded ? Nord.launcherBorder : Nord.compactBorder
+        border.color: Nord.surfaceBorder
 
         ColumnLayout {
             id: content
@@ -114,25 +115,49 @@ PanelWindow {
             Rectangle {
                 Layout.fillWidth: true
                 implicitHeight: root.expanded ? 40 : 44
+                Layout.minimumHeight: implicitHeight
+                Layout.maximumHeight: implicitHeight
                 radius: root.expanded ? 12 : 22
                 color: root.expanded ? Nord.pill : "transparent"
                 border.width: root.expanded ? 1 : 0
                 border.color: Nord.launcherBorder
                 RowLayout {
-                    anchors.fill: parent
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: root.expanded ? 11 : 0
                     anchors.rightMargin: root.expanded ? 11 : 0
+                    height: 22
                     spacing: 9
-                    Text { text: "⌕"; color: Nord.accent; font.pixelSize: 18; Layout.preferredWidth: 22; horizontalAlignment: Text.AlignHCenter }
+                    Item {
+                        Layout.preferredWidth: 22
+                        Layout.preferredHeight: 22
+                        Layout.alignment: Qt.AlignVCenter
+                        Icons.Icon {
+                            anchors.centerIn: parent
+                            width: 18; height: 18
+                            name: "search"
+                            color: Nord.accent
+                        }
+                    }
                     TextInput {
                         id: search
                         Layout.fillWidth: true
+                        Layout.preferredHeight: 22
+                        verticalAlignment: TextInput.AlignVCenter
                         color: Nord.fg
                         font.pixelSize: 12
                         clip: true
                         selectByMouse: true
                         focus: true
-                        Text { visible: !search.text; text: "Search apps or the web…"; color: Nord.placeholder; font: search.font }
+                        Text {
+                            anchors.fill: parent
+                            verticalAlignment: Text.AlignVCenter
+                            visible: !search.text
+                            text: "Search apps or the web…"
+                            color: Nord.placeholder
+                            font: search.font
+                        }
                         Keys.onDownPressed: root.move(1)
                         Keys.onUpPressed: root.move(-1)
                         Keys.onReturnPressed: { if (root.expanded) root.open(root.selected < 0 ? root.matches.length : root.selected); }
