@@ -65,6 +65,7 @@
         exec_once = [
           "${pkgs.lib.getExe self'.packages.wpaperd} -d"
           (pkgs.lib.getExe self'.packages.quickshell)
+          (pkgs.lib.getExe self'.packages.nord-idle)
         ];
 
         # 5 workspace dots in the bar
@@ -78,26 +79,28 @@
         # Keep background colors from bleeding into the launcher’s rounded edge.
         layer_rule = [
           "layer_name:^nord-launcher$,no_blur:1"
+          "layer_name:^nord-session$,no_blur:1"
         ];
 
         bind =
           [
             "SUPER,r,reload_config"
+            "SUPER,l,spawn,${pkgs.lib.getExe self'.packages.nord-lock}"
             "SHIFT,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot} --area"
             "NONE,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot}"
 
             "SUPER,Return,spawn,foot"
             "ALT,d,spawn,${pkgs.lib.getExe self'.packages.quickshell} ipc call launcher toggle"
 
-            "SUPER,h,focusdir,left"
-            "SUPER,l,focusdir,right"
-            "SUPER,k,focusdir,up"
-            "SUPER,j,focusdir,down"
+            "ALT,h,focusdir,left"
+            "ALT,l,focusdir,right"
+            "ALT,k,focusdir,up"
+            "ALT,j,focusdir,down"
 
-            "SUPER+SHIFT,k,exchange_client,up"
-            "SUPER+SHIFT,j,exchange_client,down"
-            "SUPER+SHIFT,h,exchange_client,left"
-            "SUPER+SHIFT,l,exchange_client,right"
+            "ALT+SHIFT,k,exchange_client,up"
+            "ALT+SHIFT,j,exchange_client,down"
+            "ALT+SHIFT,h,exchange_client,left"
+            "ALT+SHIFT,l,exchange_client,right"
 
             "SUPER,f,togglemaximizescreen"
             "SUPER,space,togglefloating"
@@ -111,8 +114,8 @@
           ]) (builtins.genList (i: i + 1) 5);
 
         mousebind = [
-          "SUPER,btn_left,moveresize,curmove"
-          "SUPER,btn_right,moveresize,curresize"
+          "ALT,btn_left,moveresize,curmove"
+          "ALT,btn_right,moveresize,curresize"
         ];
       };
     };

@@ -2,14 +2,14 @@ import "../core"
 import QtQuick
 import Quickshell
 
-// Transparent 35px strip with a centered 24px Nord capsule.
+// Scale the reference capsule by 1.5, including typography and pointer targets.
 PanelWindow {
     id: root
     signal launcherRequested()
     signal notificationsRequested()
     signal powerRequested()
     property bool unread: false
-    readonly property real capsuleRight: capsule.x + capsule.width
+    readonly property real capsuleRight: capsule.x + capsule.width * (1 + capsule.scale) / 2
 
     anchors {
         top: true
@@ -17,7 +17,7 @@ PanelWindow {
         right: true
     }
 
-    implicitHeight: 35
+    implicitHeight: 53
     color: "transparent"
 
     Rectangle {
@@ -29,6 +29,7 @@ PanelWindow {
 
     Capsule {
         id: capsule
+        scale: 1.5
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 

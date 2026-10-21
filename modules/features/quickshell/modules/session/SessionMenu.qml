@@ -20,7 +20,7 @@ PanelWindow {
     onVisibleChanged: { confirming = false; pendingAction = ""; if (visible) keys.forceActiveFocus(); }
     function run(action) {
         root.visible = false;
-        if (action === "Lock") Quickshell.execDetached(["swaylock", "-f", "-c", "2e3440"]);
+        if (action === "Lock") Quickshell.execDetached(["nord-lock"]);
         else if (action === "Log out") Quickshell.execDetached(["mmsg", "dispatch", "quit"]);
         else Quickshell.execDetached(["systemctl", action === "Restart" ? "reboot" : "poweroff"]);
     }
@@ -33,11 +33,11 @@ PanelWindow {
         Rectangle {
             id: menu
             x: Math.max(12, Math.min(parent.width - width - 12, root.anchorRight - width))
-            y: 36
+            y: 53
             width: 232
             height: menuContent.implicitHeight + 16
             radius: 14
-            color: "#ad2e3440"
+            color: "#2e3440"
             border { width: 1; color: "#36d8dee9" }
             MouseArea { anchors.fill: parent }
             ColumnLayout {
@@ -102,7 +102,7 @@ PanelWindow {
             Rectangle {
                 anchors.centerIn: parent
                 width: 300; height: 174; radius: 16
-                color: Nord.launcherBg
+                color: "#2e3440"
                 border { width: 1; color: Nord.launcherBorder }
                 MouseArea { anchors.fill: parent }
                 ColumnLayout {

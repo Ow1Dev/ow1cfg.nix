@@ -15,9 +15,9 @@ PanelWindow {
     WlrLayershell.namespace: "nord-notifications"
     WlrLayershell.keyboardFocus: opened ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
     anchors { top: true; right: true }
-    margins { top: 48; right: 20 }
+    margins { top: 61; right: 20 }
     implicitWidth: Math.min(opened ? 340 : 320, screen ? screen.width - 40 : 340)
-    implicitHeight: opened ? Math.min(center.implicitHeight, screen ? screen.height - 90 : 650) : toastStack.implicitHeight
+    implicitHeight: opened ? Math.min(center.implicitHeight, screen ? screen.height - 103 : 650) : toastStack.implicitHeight
     onOpenedChanged: { if (opened) { NotificationState.markRead(); center.forceActiveFocus(); } }
     Rectangle {
         id: center
