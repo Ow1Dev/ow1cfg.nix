@@ -79,7 +79,6 @@ PanelWindow {
                                 Icons.Icon { anchors.centerIn: parent; width: 13; height: 13; name: ["lock", "logout", "restart", "power"][entry.index]; color: entry.index === 3 ? "#e3a1a7" : Nord.accent }
                             }
                             Text { Layout.fillWidth: true; text: entry.modelData; color: entry.index === 3 ? "#e3a1a7" : Nord.text; font { pixelSize: 10; bold: true } }
-                            Icons.Icon { visible: entry.index === 3; name: "chevron-right"; implicitWidth: 12; implicitHeight: 12; color: Nord.hint }
                         }
                         MouseArea {
                             id: hover
