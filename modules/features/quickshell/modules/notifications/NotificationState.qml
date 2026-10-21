@@ -12,7 +12,6 @@ Scope {
     function markRead() {
         unreadIds = [];
         popupIds = [];
-        for (const notification of notifications.slice()) if (notification.transient) notification.expire();
     }
     function remove(id) {
         unreadIds = unreadIds.filter(value => value !== id);
@@ -46,7 +45,6 @@ Scope {
                 onTriggered: {
                     const notification = tracked.modelData;
                     root.popupIds = root.popupIds.filter(id => id !== notification.id);
-                    if (notification.transient) notification.expire();
                 }
             }
         }

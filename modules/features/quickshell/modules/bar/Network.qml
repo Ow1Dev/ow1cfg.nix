@@ -5,7 +5,7 @@ import Quickshell.Io
 
 Item {
     id: root
-    implicitWidth: 33
+    implicitWidth: signalBars.implicitWidth
     implicitHeight: 24
     property int strength: 0
     property bool connected: false
@@ -28,6 +28,7 @@ Item {
     }
     Timer { interval: 10000; running: true; repeat: true; onTriggered: { status.running = true; wifi.running = true; } }
     Icons.NetworkBars {
+        id: signalBars
         renderScale: Nord.barScale
         anchors.centerIn: parent
         strength: root.connected ? Math.max(1, Math.min(4, Math.ceil(root.strength / 25))) : 0

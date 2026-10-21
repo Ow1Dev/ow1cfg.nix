@@ -45,9 +45,11 @@
       if [ "''${1-}" = --area ]; then
         geometry=$(${pkgs.lib.getExe pkgs.slurp} -d)
         [ -n "$geometry" ] || exit 0
-        exec ${pkgs.lib.getExe pkgs.grim} -g "$geometry" "$output"
+        ${pkgs.lib.getExe pkgs.grim} -g "$geometry" "$output"
+      else
+        ${pkgs.lib.getExe pkgs.grim} "$output"
       fi
-      exec ${pkgs.lib.getExe pkgs.grim} "$output"
+      ${pkgs.lib.getExe pkgs.libnotify} "Screenshot saved" "$output"
     '';
 
     packages.mangowc = inputs.wrappers.wrappers.mangowc.wrap {
@@ -59,6 +61,40 @@
 
       settings = {
         xkb_rules_layout = "dk";
+
+        # Nord palette copied from Quickshell's modules/core/Nord.qml.
+        # Mango colors use RRGGBBAA (alpha last).
+        root_color = "0x2e3440ff";
+        border_color = "0x4c566aff";
+        focus_color = "0x88c0d0ff";
+        urgent_color = "0xbf616aff";
+        drop_color = "0x88c0d055";
+        split_color = "0xebcb8bff";
+        maximized_screen_color = "0xa3be8cff";
+        scratchpad_color = "0x81a1c1ff";
+        global_color = "0xb48eadff";
+        overlay_color = "0x8fbcbbff";
+        shadows_color = "0x2e344066";
+
+        # Overview jump labels.
+        jump_label_decorate_fg_color = "0xeceff4ff";
+        jump_label_decorate_bg_color = "0x3b4252ff";
+        jump_label_decorate_focus_fg_color = "0x2e3440ff";
+        jump_label_decorate_focus_bg_color = "0x88c0d0ff";
+        jump_label_decorate_border_color = "0x4c566aff";
+
+        # Group and tab decorations use the same surfaces as the launcher.
+        group_bar_decorate_fg_color = "0xd8dee9ff";
+        group_bar_decorate_bg_color = "0x3b4252ff";
+        group_bar_decorate_focus_fg_color = "0x2e3440ff";
+        group_bar_decorate_focus_bg_color = "0x88c0d0ff";
+        group_bar_decorate_border_color = "0x4c566aff";
+        group_bar_button_color = "0x88c0d0ff";
+        tab_bar_decorate_fg_color = "0xd8dee9ff";
+        tab_bar_decorate_bg_color = "0x3b4252ff";
+        tab_bar_decorate_focus_fg_color = "0x2e3440ff";
+        tab_bar_decorate_focus_bg_color = "0x88c0d0ff";
+        tab_bar_decorate_border_color = "0x4c566aff";
 
         # autostart (wrapper's autostart_sh emits `exec-once`, which nightly
         # renamed to `exec_once`)
@@ -85,7 +121,7 @@
         bind =
           [
             "SUPER,r,reload_config"
-            "SUPER,l,spawn,${pkgs.lib.getExe self'.packages.nord-lock}"
+            "SUPER+SHIFT,l,spawn,${pkgs.lib.getExe self'.packages.nord-lock}"
             "SHIFT,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot} --area"
             "NONE,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot}"
 

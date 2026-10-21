@@ -43,15 +43,16 @@ PanelWindow {
         }
         Segment {
             divider: true
-            horizontalPadding: 5
-            spacing: 0
+            horizontalPadding: 8
+            spacing: 6
             Network {}
             BarButton {
                 glyph: "bell"
+                horizontalPadding: 0
                 unread: root.unread
                 onActivated: root.notificationsRequested()
             }
-            Battery { horizontalPadding: 8 }
+            Battery { horizontalPadding: 0 }
         }
         BarButton {
             divider: true
