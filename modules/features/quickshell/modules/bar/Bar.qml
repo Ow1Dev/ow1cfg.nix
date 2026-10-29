@@ -56,7 +56,7 @@ PanelWindow {
         }
         BarButton {
             divider: true
-            glyph: "power"
+            glyph: "profile"
             onActivated: root.powerRequested()
         }
     }

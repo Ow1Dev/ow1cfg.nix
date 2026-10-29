@@ -2,6 +2,10 @@ import "../Icons" as Icons
 import "../core"
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell.Io
+import Quickshell.Services.Pipewire
+import "../notifications"
 import Quickshell
 import Quickshell.Wayland
 
@@ -15,53 +19,74 @@ PanelWindow {
     WlrLayershell.namespace: "nord-session"
     anchors { top: true; left: true; right: true; bottom: true }
     property real anchorRight: width / 2 + 190
+    property bool sessionExpanded: false
+    property string uptime: "…"
     property bool confirming: false
     property string pendingAction: ""
     readonly property string userName: Quickshell.env("USER") || "User"
-    onVisibleChanged: { confirming = false; pendingAction = ""; if (visible) keys.forceActiveFocus(); }
+    onVisibleChanged: { confirming = false; sessionExpanded = false; pendingAction = ""; if (visible) uptimeProcess.running = true; if (visible) keys.forceActiveFocus(); }
     function run(action) {
         root.visible = false;
         if (action === "Lock") Quickshell.execDetached(["nord-lock"]);
+        else if (action === "Sleep") Quickshell.execDetached(["systemctl", "suspend"]);
         else if (action === "Log out") Quickshell.execDetached(["mmsg", "dispatch", "quit"]);
         else Quickshell.execDetached(["systemctl", action === "Restart" ? "reboot" : "poweroff"]);
     }
+    PwObjectTracker { objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource].filter(node => node !== null) }
+    Process {
+        id: uptimeProcess
+        command: ["cat", "/proc/uptime"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const minutes = Math.floor(parseFloat(text) / 60);
+                root.uptime = Math.floor(minutes / 60) + "h " + (minutes % 60) + "m";
+            }
+        }
+    }
+    Timer { interval: 60000; running: root.visible; repeat: true; onTriggered: uptimeProcess.running = true }
     Item {
         id: keys
         anchors.fill: parent
         focus: true
-        Keys.onEscapePressed: { if (root.confirming) root.confirming = false; else root.visible = false; }
+        Keys.onEscapePressed: { if (root.confirming) root.confirming = false; else if (root.sessionExpanded) root.sessionExpanded = false; else root.visible = false; }
         MouseArea { anchors.fill: parent; onClicked: root.visible = false }
         Rectangle {
             id: menu
             x: Math.max(12, Math.min(parent.width - width - 12, root.anchorRight - width))
             y: Nord.barHeight
-            width: 232
-            height: menuContent.implicitHeight + 16
-            radius: 14
+            width: 290
+            height: menuContent.implicitHeight + 28
+            radius: 12
             color: "#2e3440"
-            border { width: 1; color: "#36d8dee9" }
+            border { width: 1; color: Nord.launcherBorder }
             MouseArea { anchors.fill: parent }
             ColumnLayout {
                 id: menuContent
-                anchors { left: parent.left; right: parent.right; top: parent.top; margins: 8 }
+                anchors { left: parent.left; right: parent.right; top: parent.top; margins: 14 }
                 spacing: 3
-                RowLayout {
+                Item {
                     Layout.fillWidth: true
-                    Layout.margins: 6
-                    spacing: 8
-                    Rectangle {
-                        width: 27; height: 27; radius: 9
-                        gradient: Gradient { GradientStop { position: 0; color: Nord.accent } GradientStop { position: 1; color: "#5e81ac" } }
-                        Text { anchors.centerIn: parent; text: root.userName.charAt(0).toUpperCase(); color: Nord.accentFg; font { pixelSize: 11; bold: true } }
+                    implicitHeight: 32
+                    Layout.bottomMargin: 12
+                    Rectangle { anchors.left: parent.left; width: 3; height: 32; color: Nord.accent }
+                    ColumnLayout {
+                        anchors { left: parent.left; leftMargin: 12; right: sessionToggle.left; rightMargin: 9; verticalCenter: parent.verticalCenter }
+                        spacing: 2
+                        Text { text: root.userName; color: Nord.fg; font { pixelSize: 12; bold: true } }
+                        Text { text: "Uptime · " + root.uptime; color: Nord.secondary; font.pixelSize: 9 }
                     }
-                    Column {
-                        Text { text: root.userName; color: Nord.fg; font { pixelSize: 10; bold: true } }
-                        Text { text: "Personal session"; color: Nord.hint; font.pixelSize: 8 }
+                    Button {
+                        id: sessionToggle
+                        anchors { right: parent.right; verticalCenter: parent.verticalCenter }
+                        implicitWidth: 29; implicitHeight: 29
+                        Accessible.name: "Session and power"
+                        onClicked: root.sessionExpanded = !root.sessionExpanded
+                        background: Rectangle { radius: 9; color: Nord.pill; border.color: Nord.sep }
+                        contentItem: Icons.Icon { name: "power"; color: "#d9969e" }
                     }
                 }
-                Rectangle { Layout.fillWidth: true; Layout.bottomMargin: 5; height: 1; color: Nord.sep }
                 Repeater {
-                    model: ["Lock", "Log out", "Restart", "Shut down"]
+                    model: root.sessionExpanded ? ["Log out", "Restart", "Shut down"] : []
                     Rectangle {
                         id: entry
                         required property string modelData
@@ -75,10 +100,10 @@ PanelWindow {
                             spacing: 8
                             Rectangle {
                                 width: 20; height: 20; radius: 6
-                                color: entry.index === 3 ? "#28bf616a" : Nord.pillHover
-                                Icons.Icon { anchors.centerIn: parent; width: 13; height: 13; name: ["lock", "logout", "restart", "power"][entry.index]; color: entry.index === 3 ? "#e3a1a7" : Nord.accent }
+                                color: entry.index === 2 ? "#28bf616a" : Nord.pillHover
+                                Icons.Icon { anchors.centerIn: parent; width: 13; height: 13; name: ["logout", "restart", "power"][entry.index]; color: entry.index === 2 ? "#e3a1a7" : Nord.accent }
                             }
-                            Text { Layout.fillWidth: true; text: entry.modelData; color: entry.index === 3 ? "#e3a1a7" : Nord.text; font { pixelSize: 10; bold: true } }
+                            Text { Layout.fillWidth: true; text: entry.modelData; color: entry.index === 2 ? "#e3a1a7" : Nord.text; font { pixelSize: 10; bold: true } }
                         }
                         MouseArea {
                             id: hover
@@ -86,9 +111,38 @@ PanelWindow {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
-                                if (entry.index === 0) root.run(entry.modelData);
-                                else { root.pendingAction = entry.modelData; root.confirming = true; }
+                                root.pendingAction = entry.modelData; root.confirming = true;
                             }
+                        }
+                    }
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.topMargin: 9
+                    spacing: 8
+                    AudioTile { Layout.fillWidth: true; title: "Volume"; glyph: "volume"; node: Pipewire.defaultAudioSink }
+                    AudioTile { Layout.fillWidth: true; title: "Microphone"; glyph: "microphone"; node: Pipewire.defaultAudioSource }
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.topMargin: 9
+                    spacing: 6
+                    Repeater {
+                        model: ["Lock", "Sleep", "Focus"]
+                        Button {
+                            required property string modelData
+                            Layout.fillWidth: true
+                            implicitHeight: 32
+                            text: modelData
+                            Accessible.name: modelData === "Focus" ? "Focus: silence notification popups" : modelData
+                            checkable: modelData === "Focus"
+                            checked: modelData === "Focus" && NotificationState.focusMode
+                            onClicked: {
+                                if (modelData === "Focus") NotificationState.focusMode = !NotificationState.focusMode;
+                                else root.run(modelData);
+                            }
+                            background: Rectangle { radius: 8; color: parent.checked ? Nord.accent : Nord.pill }
+                            contentItem: Text { text: parent.text; color: parent.checked ? Nord.accentFg : Nord.text; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter; font.pixelSize: 10 }
                         }
                     }
                 }

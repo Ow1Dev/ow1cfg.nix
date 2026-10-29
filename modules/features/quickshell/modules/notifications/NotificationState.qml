@@ -5,6 +5,8 @@ import Quickshell.Services.Notifications
 
 Scope {
     id: root
+    property bool focusMode: false
+    onFocusModeChanged: if (focusMode) popupIds = []
     property var unreadIds: []
     property var popupIds: []
     readonly property bool unread: unreadIds.length > 0
@@ -26,7 +28,7 @@ Scope {
             notification.tracked = true;
             if (!notification.lastGeneration) {
                 root.unreadIds = root.unreadIds.filter(id => id !== notification.id).concat([notification.id]);
-                root.popupIds = root.popupIds.filter(id => id !== notification.id).concat([notification.id]);
+                if (!root.focusMode) root.popupIds = root.popupIds.filter(id => id !== notification.id).concat([notification.id]);
             }
         }
     }
