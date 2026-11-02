@@ -3,7 +3,7 @@
   moduleWithSystem,
   ...
 }: {
-  flake.nixosModules.development = moduleWithSystem ({pkgs, ...}: let
+  flake.nixosModules.development = moduleWithSystem ({unstablePkgs, ...}: let
     modules = with self.nixosModules; [
       nvim
       git
@@ -11,7 +11,7 @@
     ];
   in {
     imports = modules;
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with unstablePkgs; [
       devenv
     ];
   });
