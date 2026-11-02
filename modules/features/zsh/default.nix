@@ -27,7 +27,7 @@
   }: {
     packages.zsh = inputs.wrappers.wrappers.zsh.wrap {
       inherit pkgs;
-      runtimePkgs = [pkgs.devenv];
+      runtimePkgs = [pkgs.devenv pkgs.fzf];
       zshrc.content = ''
         autoload -U compinit && compinit
         export EDITOR=nvim
@@ -59,6 +59,7 @@
         setopt PROMPT_SUBST
         PROMPT='%F{blue}$(in_nix)$(get_path)%F{green}$(b=$(parse_git_branch); [[ -n "$b" ]] && echo " ($b)") %F{8}$ %f'
 
+        source <(${lib.getExe pkgs.fzf} --zsh)
         eval "$(${lib.getExe pkgs.devenv} hook zsh)"
       '';
     };

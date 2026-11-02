@@ -62,6 +62,8 @@
       settings = {
         xkb_rules_layout = "dk";
 
+        circle_layout = "dwindle,scroller";
+
         # Nord palette copied from Quickshell's modules/core/Nord.qml.
         # Mango colors use RRGGBBAA (alpha last).
         root_color = "0x2e3440ff";
@@ -143,6 +145,8 @@
 
             "SUPER+SHIFT,q,quit"
             "SUPER,q,killclient"
+
+            "SUPER,n,switch_layout"
           ]
           ++ builtins.concatMap (i: [
             "SUPER,${toString i},view,${toString i},0"
