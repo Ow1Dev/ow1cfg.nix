@@ -5,7 +5,7 @@
       version = "1.0";
       src = ./.;
       installPhase = ''
-        themeDir=$out/share/sddm/themes/nord
+        themeDir=$out/share/sddm/themes/nord-my
         mkdir -p "$themeDir"
         cp ${./Main.qml} "$themeDir/Main.qml"
         cp ${./theme.conf} "$themeDir/theme.conf"
@@ -16,7 +16,7 @@
     environment.systemPackages = [nordSddmTheme];
     services.displayManager.sddm = {
       enable = true;
-      theme = "nord";
+      theme = "nord-my";
     };
   };
 }
