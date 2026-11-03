@@ -243,11 +243,11 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1793643710,
-        "narHash": "sha256-GsVR5VbUiu4ZS6etJy5zWdDINrT4qdvaIwVp7TvEWTw=",
+        "lastModified": 1793650740,
+        "narHash": "sha256-671z8YEuf7GIsC3O3Kog9uA62pPRMVO4Eq2E/hdZUKw=",
         "ref": "refs/heads/main",
-        "rev": "1e9625a26b94c774ca4b3983417c526760f1481b",
-        "revCount": 46,
+        "rev": "d9e138c3fb897d2176b6d44618a1503dd00e1fdb",
+        "revCount": 48,
         "type": "git",
         "url": "https://github.com/Ow1Dev/Ow1Nvim"
       },
