@@ -3,9 +3,14 @@
   moduleWithSystem,
   ...
 }: {
-  flake.nixosModules.pi-agent = moduleWithSystem ({self', ...}: {
-    environment.systemPackages = with self'.packages; [
-      pi-agent
+  flake.nixosModules.pi-agent = moduleWithSystem ({
+    self',
+    pkgs,
+    ...
+  }: {
+    environment.systemPackages = [
+      self'.packages.pi-agent
+      pkgs.ripgrep
     ];
   });
   perSystem = {
