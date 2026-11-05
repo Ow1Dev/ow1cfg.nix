@@ -20,11 +20,12 @@ PanelWindow {
     anchors { top: true; left: true; right: true; bottom: true }
     property real anchorRight: width / 2 + 190
     property bool sessionExpanded: false
+    property string connectivityPage: ""
     property string uptime: "…"
     property bool confirming: false
     property string pendingAction: ""
     readonly property string userName: Quickshell.env("USER") || "User"
-    onVisibleChanged: { confirming = false; sessionExpanded = false; pendingAction = ""; if (visible) uptimeProcess.running = true; if (visible) keys.forceActiveFocus(); }
+    onVisibleChanged: { confirming = false; sessionExpanded = false; connectivityPage = ""; pendingAction = ""; if (visible) uptimeProcess.running = true; if (visible) keys.forceActiveFocus(); }
     function run(action) {
         root.visible = false;
         if (action === "Lock") Quickshell.execDetached(["nord-lock"]);
@@ -48,7 +49,7 @@ PanelWindow {
         id: keys
         anchors.fill: parent
         focus: true
-        Keys.onEscapePressed: { if (root.confirming) root.confirming = false; else if (root.sessionExpanded) root.sessionExpanded = false; else root.visible = false; }
+        Keys.onEscapePressed: { if (root.confirming) root.confirming = false; else if (root.connectivityPage) root.connectivityPage = ""; else if (root.sessionExpanded) root.sessionExpanded = false; else root.visible = false; }
         MouseArea { anchors.fill: parent; onClicked: root.visible = false }
         Rectangle {
             id: menu
@@ -115,6 +116,41 @@ PanelWindow {
                             }
                         }
                     }
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.topMargin: 9
+                    spacing: 8
+                    Repeater {
+                        model: ["Bluetooth", "Wi-Fi"]
+                        Button {
+                            id: card
+                            required property string modelData
+                            Layout.fillWidth: true
+                            implicitHeight: 69
+                            Accessible.name: "Manage " + modelData
+                            onClicked: root.connectivityPage = root.connectivityPage === modelData ? "" : modelData
+                            background: Rectangle { radius: 11; color: root.connectivityPage === card.modelData ? Nord.pillHover : Nord.pill }
+                            contentItem: ColumnLayout {
+                                anchors.margins: 10
+                                spacing: 5
+                                RowLayout {
+                                    spacing: 6
+                                    Icons.Icon { name: card.modelData === "Wi-Fi" ? "network-4" : "bluetooth"; color: Nord.accent; implicitWidth: 16; implicitHeight: 16 }
+                                    Text { text: card.modelData; color: Nord.text; font { pixelSize: 10; bold: true } }
+                                }
+                                Text { text: "Manage devices"; color: Nord.secondary; font.pixelSize: 9 }
+                            }
+                        }
+                    }
+                }
+                Loader {
+                    Layout.fillWidth: true
+                    active: root.connectivityPage !== ""
+                    visible: active // Hidden layout items contribute neither height nor column spacing.
+                    source: root.connectivityPage === "Wi-Fi" ? "WifiPanel.qml" : "BluetoothPanel.qml"
+                    onLoaded: item.width = width
+                    onWidthChanged: if (item) item.width = width
                 }
                 RowLayout {
                     Layout.fillWidth: true

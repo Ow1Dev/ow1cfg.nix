@@ -1,2 +1,5 @@
 SessionMenu 1.0 SessionMenu.qml
 AudioTile 1.0 AudioTile.qml
+ConnectivityButton 1.0 ConnectivityButton.qml
+BluetoothPanel 1.0 BluetoothPanel.qml
+WifiPanel 1.0 WifiPanel.qml
