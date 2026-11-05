@@ -12,6 +12,8 @@ Rectangle {
     property var networks: []
     property bool wifiEnabled: false
     property string message: "Loading Wi-Fi…"
+    property bool loading: true
+    property bool busy: false
     property string selectedSsid: ""
 
     // nmcli escapes colons and backslashes in terse output (SSID may contain either).
@@ -26,7 +28,7 @@ Rectangle {
         result.push(value);
         return result;
     }
-    function refresh() { radio.running = true; list.running = true; }
+    function refresh() { loading = true; radio.running = true; list.running = true; }
     Component.onCompleted: refresh()
 
     Process {
@@ -51,10 +53,13 @@ Rectangle {
                 for (const key of Object.keys(seen)) entries.push(seen[key]);
                 entries.sort((a, b) => Number(b.active) - Number(a.active) || b.signal - a.signal);
                 root.networks = entries;
-                root.message = entries.length ? "" : "No networks found. Try Refresh.";
+                if (!root.busy && (root.message === "Loading Wi-Fi…" || root.message === "Searching for Wi-Fi…")) root.message = entries.length ? "" : "No networks found. Try Refresh.";
             }
         }
-        onExited: function(exitCode) { if (exitCode !== 0 && root.wifiEnabled) root.message = "Could not scan Wi-Fi networks."; }
+        onExited: function(exitCode) {
+            root.loading = false;
+            if (exitCode !== 0 && root.wifiEnabled && !root.busy) root.message = "Could not scan Wi-Fi networks.";
+        }
     }
     Process {
         id: action
@@ -62,6 +67,7 @@ Rectangle {
         property string errorText: ""
         stderr: StdioCollector { onStreamFinished: action.errorText = text.trim() }
         onExited: function(exitCode) {
+            root.busy = false;
             root.message = exitCode === 0 ? (operation === "connect" ? "Connected." : "Wi-Fi updated.") : (errorText || "Wi-Fi operation failed.");
             root.selectedSsid = "";
             password.text = "";
@@ -76,9 +82,13 @@ Rectangle {
             Layout.fillWidth: true
             Text { Layout.fillWidth: true; text: "Wi-Fi"; color: Nord.fg; font { pixelSize: 11; bold: true } }
             ConnectivityButton { text: root.wifiEnabled ? "Turn off" : "Turn on"; onClicked: { action.operation = "radio"; action.errorText = ""; action.command = ["nmcli", "radio", "wifi", root.wifiEnabled ? "off" : "on"]; action.running = true; } }
-            ConnectivityButton { text: "Refresh"; enabled: list ? !list.running : false; onClicked: root.refresh() }
+            ConnectivityButton { text: "Refresh"; enabled: list ? !list.running : false; onClicked: { root.message = "Searching for Wi-Fi…"; root.refresh(); } }
         }
-        Text { Layout.fillWidth: true; visible: root.message !== ""; text: root.message; wrapMode: Text.Wrap; color: Nord.secondary; font.pixelSize: 10 }
+        ConnectivitySpinner {
+            Layout.alignment: Qt.AlignHCenter
+            visible: root.loading || root.busy
+        }
+        Text { Layout.fillWidth: true; visible: root.message !== ""; text: root.message; wrapMode: Text.Wrap; horizontalAlignment: Text.AlignHCenter; color: Nord.secondary; font.pixelSize: 10 }
         Flickable {
             Layout.fillWidth: true
             Layout.preferredHeight: Math.min(10, root.networks.length) * 34
@@ -137,6 +147,7 @@ Rectangle {
         action.command = ["nmcli", "device", "wifi", "connect", ssid];
         if (secret) action.command = action.command.concat(["password", secret]);
         message = "Connecting to " + ssid + "…";
+        busy = true;
         action.running = true;
     }
 }

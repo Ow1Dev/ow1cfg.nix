@@ -11,8 +11,8 @@ Button {
     property bool locked: false
     background: Rectangle {
         radius: 7
-        color: root.down || root.hovered ? Nord.pillHover : Nord.pill
-        border.color: Nord.sep
+        color: root.enabled && (root.down || root.hovered) ? Nord.accent : Nord.pillHover
+        border.color: root.enabled && root.hovered ? Nord.accent : Nord.sep
         opacity: root.enabled ? 1 : 0.5
     }
     contentItem: RowLayout {
@@ -20,7 +20,7 @@ Button {
         Text {
             Layout.fillWidth: true
             text: root.text
-            color: root.enabled ? Nord.text : Nord.hint
+            color: !root.enabled ? Nord.hint : root.down || root.hovered ? Nord.accentFg : Nord.text
             font.pixelSize: 10
             font.bold: root.down
             horizontalAlignment: root.locked ? Text.AlignLeft : Text.AlignHCenter
@@ -30,7 +30,7 @@ Button {
         Icons.Icon {
             visible: root.locked
             name: "wifi-lock"
-            color: Nord.fg
+            color: root.down || root.hovered ? Nord.accentFg : Nord.fg
             implicitWidth: 15
             implicitHeight: 15
         }

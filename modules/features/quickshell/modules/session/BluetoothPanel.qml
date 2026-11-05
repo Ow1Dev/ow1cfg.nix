@@ -20,6 +20,9 @@ Rectangle {
     property bool powered: false
     property bool firstScan: true
     property string message: "Loading Bluetooth…"
+    property bool loading: true
+    property bool busy: false
+    property string pendingVerify: ""
     property string target: ""
 
     function parseDevices(text) {
@@ -36,6 +39,20 @@ Rectangle {
         message = "Searching for devices (10 seconds)…";
         discovery.running = true;
     }
+    function operate(operation, address, name) {
+        if (!action) return;
+        if (action.running) {
+            message = "Still working on " + action.deviceName + "…";
+            return;
+        }
+        // A status check must not leave Connect unusable if it returns no result.
+        pendingVerify = "";
+        target = address;
+        action.deviceName = name;
+        busy = true;
+        action.operation = operation === "connect" && !paired[address] ? "pairable" : operation;
+        action.startStage();
+    }
     Component.onCompleted: refresh()
     Process {
         id: adapter
@@ -46,6 +63,7 @@ Rectangle {
                 if (!/\bController\b/.test(text)) root.message = "No Bluetooth adapter found.";
                 else if (!root.powered) root.message = "Bluetooth is off.";
                 if (root.firstScan && root.powered) { root.firstScan = false; root.scan(); }
+                if (!root.powered) root.loading = false;
             }
         }
     }
@@ -58,7 +76,8 @@ Rectangle {
                 root.devices = Object.keys(found).map(address => ({ address: address, name: found[address] }));
                 details.queue = root.devices.filter(device => !root.resolvedNames[device.address] && root.isAddress(device.name)).map(device => device.address);
                 if (!details.running) details.next();
-                if (!root.namedDevices.length && root.powered && !discovery.running) root.message = "No named devices found. Put your device in pairing mode and Scan.";
+                if (!root.namedDevices.length && root.powered && !discovery.running && !root.busy) root.message = "No named devices found. Put your device in pairing mode and Scan.";
+                if (!discovery.running) root.loading = false;
             }
         }
     }
@@ -81,7 +100,7 @@ Rectangle {
                                  .find(value => !root.isAddress(value));
                 if (name) {
                     root.resolvedNames = Object.assign({}, root.resolvedNames, { [details.address]: name });
-                    if (root.namedDevices.length) root.message = "";
+                    if (root.namedDevices.length && !root.busy && !discovery.running) root.message = "";
                 }
             }
         }
@@ -96,29 +115,65 @@ Rectangle {
         id: connectedList
         command: ["bluetoothctl", "devices", "Connected"]
         stdout: StdioCollector { onStreamFinished: root.connected = root.parseDevices(text) }
+        onExited: {
+            if (root.pendingVerify) {
+                root.message = root.connected[root.pendingVerify] ? "Connected to " + action.deviceName + "." : "Connection was not established. Keep the device in pairing mode and try Connect again.";
+                root.pendingVerify = "";
+                root.busy = false;
+            }
+        }
     }
     Process {
         id: discovery
         command: ["bluetoothctl", "--timeout", "10", "scan", "on"]
-        onExited: { root.message = ""; root.refresh(); }
+        onExited: {
+            if (!root.busy) root.message = "";
+            root.refresh();
+        }
     }
     Process {
         id: action
         property string operation: ""
+        property string deviceName: ""
         property string errorText: ""
+        property string outputText: ""
+        function startStage() {
+            errorText = "";
+            outputText = "";
+            if (operation === "pairable") {
+                root.message = "Preparing to pair with " + deviceName + "…";
+                command = ["bluetoothctl", "pairable", "on"];
+            } else if (operation === "pair") {
+                root.message = "Pairing with " + deviceName + "… Keep it in pairing mode.";
+                // A temporary local agent handles the usual headset 'Just Works' pairing.
+                command = ["bluetoothctl", "--agent", "NoInputNoOutput", "--timeout", "30", "pair", root.target];
+            } else if (operation === "connect" || operation === "disconnect") {
+                root.message = (operation === "connect" ? "Connecting to " : "Disconnecting ") + deviceName + "…";
+                command = ["bluetoothctl", "--timeout", "30", operation, root.target];
+            } else if (operation === "power") {
+                command = ["bluetoothctl", "power", root.powered ? "off" : "on"];
+            }
+            running = true;
+        }
+        stdout: StdioCollector { onStreamFinished: action.outputText = text.trim() }
         stderr: StdioCollector { onStreamFinished: action.errorText = text.trim() }
         onExited: function(exitCode) {
-            if (exitCode !== 0) {
-                root.message = errorText || "Bluetooth operation failed. Try again.";
+            const failure = (outputText + "\n" + errorText).split("\n").find(line => /failed|error/i.test(line));
+            if (exitCode !== 0 || failure) {
+                root.busy = false;
+                root.message = (failure || errorText || "Bluetooth operation failed.") + " Keep the device in pairing mode and try again.";
                 root.refresh();
-            } else if (operation === "pair") {
-                root.message = "Pairing complete. Connecting…";
-                operation = "connect";
-                errorText = "";
-                command = ["bluetoothctl", "connect", root.target];
-                running = true;
+            } else if (operation === "pairable" || operation === "pair") {
+                operation = operation === "pairable" ? "pair" : "connect";
+                startStage();
             } else {
-                root.message = operation === "connect" ? "Connected." : "Bluetooth updated.";
+                if (operation === "connect") {
+                    root.pendingVerify = root.target;
+                    root.message = "Checking connection to " + deviceName + "…";
+                } else {
+                    root.busy = false;
+                    root.message = operation === "disconnect" ? "Disconnected." : "Bluetooth updated.";
+                }
                 root.refresh();
             }
         }
@@ -133,15 +188,15 @@ Rectangle {
             ConnectivityButton {
                 text: root.powered ? "Turn off" : "Turn on"
                 enabled: action ? !action.running : false
-                onClicked: {
-                    action.operation = "power"; action.errorText = "";
-                    action.command = ["bluetoothctl", "power", root.powered ? "off" : "on"];
-                    action.running = true;
-                }
+                onClicked: root.operate("power", "", "")
             }
             ConnectivityButton { text: discovery && discovery.running ? "Scanning…" : "Scan"; enabled: root.powered && discovery && !discovery.running; onClicked: root.scan() }
         }
-        Text { Layout.fillWidth: true; visible: root.message !== ""; text: root.message; wrapMode: Text.Wrap; color: Nord.secondary; font.pixelSize: 10 }
+        ConnectivitySpinner {
+            Layout.alignment: Qt.AlignHCenter
+            visible: root.loading || root.busy || (discovery && discovery.running)
+        }
+        Text { Layout.fillWidth: true; visible: root.message !== ""; text: root.message; wrapMode: Text.Wrap; horizontalAlignment: Text.AlignHCenter; color: Nord.secondary; font.pixelSize: 10 }
         Flickable {
             Layout.fillWidth: true
             Layout.preferredHeight: Math.min(10, root.namedDevices.length) * 34
@@ -155,19 +210,31 @@ Rectangle {
                 spacing: 4
                 Repeater {
                     model: root.namedDevices
-                    ConnectivityButton {
+                    RowLayout {
+                        id: deviceRow
                         required property var modelData
                         Layout.fillWidth: true
-                        text: modelData.name + (root.connected[modelData.address] ? "  ·  Connected" : root.paired[modelData.address] ? "  ·  Paired" : "")
-                        Accessible.name: (root.connected[modelData.address] ? "Disconnect " : "Connect ") + modelData.name
-                        enabled: action ? !action.running : false
-                        onClicked: {
-                            root.target = modelData.address;
-                            action.errorText = "";
-                            action.operation = root.connected[modelData.address] ? "disconnect" : root.paired[modelData.address] ? "connect" : "pair";
-                            action.command = ["bluetoothctl", action.operation, root.target];
-                            root.message = action.operation === "pair" ? "Pairing with " + modelData.name + "…" : action.operation === "disconnect" ? "Disconnecting…" : "Connecting…";
-                            action.running = true;
+                        spacing: 5
+                        Text {
+                            Layout.fillWidth: true
+                            text: deviceRow.modelData.name
+                            color: Nord.text
+                            font.pixelSize: 10
+                            elide: Text.ElideRight
+                        }
+                        Text {
+                            visible: !!root.connected[deviceRow.modelData.address]
+                            text: "✓"
+                            color: Nord.bat
+                            font { pixelSize: 13; bold: true }
+                            Accessible.name: "Connected"
+                        }
+                        ConnectivityButton {
+                            Layout.preferredWidth: 85
+                            text: root.busy && root.target === deviceRow.modelData.address ? "Working…" : root.connected[deviceRow.modelData.address] ? "Disconnect" : "Connect"
+                            Accessible.name: text + " " + deviceRow.modelData.name
+                            enabled: root.powered
+                            onClicked: root.operate(root.connected[deviceRow.modelData.address] ? "disconnect" : "connect", deviceRow.modelData.address, deviceRow.modelData.name)
                         }
                     }
                 }
