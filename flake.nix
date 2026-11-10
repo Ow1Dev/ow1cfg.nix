@@ -9,6 +9,11 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pidev.url = "github:earendil-works/pi/stable";
 
     nvim.url = "git+https://github.com/Ow1Dev/Ow1Nvim";

@@ -64,7 +64,6 @@
 
         circle_layout = "dwindle,scroller";
 
-        # Nord palette copied from Quickshell's modules/core/Nord.qml.
         # Mango colors use RRGGBBAA (alpha last).
         root_color = "0x2e3440ff";
         border_color = "0x4c566aff";
@@ -76,7 +75,6 @@
         scratchpad_color = "0x81a1c1ff";
         global_color = "0xb48eadff";
         overlay_color = "0x8fbcbbff";
-        shadows_color = "0x2e344066";
 
         # Overview jump labels.
         jump_label_decorate_fg_color = "0xeceff4ff";
@@ -101,8 +99,7 @@
         # autostart (wrapper's autostart_sh emits `exec-once`, which nightly
         # renamed to `exec_once`)
         exec_once = [
-          "${pkgs.lib.getExe self'.packages.wpaperd} -d"
-          (pkgs.lib.getExe self'.packages.quickshell)
+          (pkgs.lib.getExe self'.packages.noctalia)
           (pkgs.lib.getExe self'.packages.nord-idle)
         ];
 
@@ -111,8 +108,24 @@
 
         # Frosted layer surfaces (bar background)
         blur = 1;
-        blur_layer = 1;
-        blur_optimized = 0;
+        blur_layer = 0;
+        blur_optimized = 1;
+        blur_params_num_passes = 2;
+        blur_params_radius = 5;
+        blur_params_noise = 0.02;
+        blur_params_brightness = 0.9;
+        blur_params_contrast = 0.9;
+        blur_params_saturation = 1.0;
+        layer_animations = 0;
+
+        shadows = 1;
+        layer_shadows = 1;
+        shadow_only_floating = 0;
+        shadows_size = 4;
+        shadows_blur = 12;
+        shadows_position_x = 2;
+        shadows_position_y = 2;
+        shadows_color = "0x000000ff";
 
         # Keep background colors from bleeding into the launcher’s rounded edge.
         layer_rule = [
@@ -128,7 +141,7 @@
             "NONE,Print,spawn_shell,${pkgs.lib.getExe self'.packages.screenshot}"
 
             "SUPER,Return,spawn,foot"
-            "ALT,d,spawn,${pkgs.lib.getExe self'.packages.quickshell} ipc call launcher toggle"
+            "ALT,d,spawn,${pkgs.lib.getExe self'.packages.noctalia} msg panel-toggle launcher"
 
             "ALT,h,focusdir,left"
             "ALT,l,focusdir,right"
