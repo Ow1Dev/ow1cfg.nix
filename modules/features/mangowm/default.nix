@@ -143,6 +143,12 @@
             "SUPER,Return,spawn,foot"
             "ALT,d,spawn,${pkgs.lib.getExe self'.packages.noctalia} msg panel-toggle launcher"
 
+            "NONE,XF86AudioRaiseVolume,spawn,noctalia msg volume-up"
+            "NONE,XF86AudioLowerVolume,spawn,noctalia msg volume-down"
+            "NONE,XF86AudioMute,spawn,noctalia msg volume-mute"
+            "NONE,XF86MonBrightnessUp,spawn,noctalia msg brightness-up"
+            "NONE,XF86MonBrightnessDown,spawn,noctalia msg brightness-down"
+
             "ALT,h,focusdir,left"
             "ALT,l,focusdir,right"
             "ALT,k,focusdir,up"

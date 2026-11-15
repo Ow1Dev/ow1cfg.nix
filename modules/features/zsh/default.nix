@@ -32,6 +32,15 @@
         autoload -U compinit && compinit
         export EDITOR=nvim
 
+        # Avoid gh's broken terminal OSC theme detection in devenv shells.
+        gh() {
+          if [[ -n "$DEVENV_ROOT" ]]; then
+            CI=1 command gh "$@"
+          else
+            command gh "$@"
+          fi
+        }
+
         autoload -Uz colors && colors
 
         parse_git_root() {
