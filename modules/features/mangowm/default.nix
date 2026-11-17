@@ -149,10 +149,10 @@
             "NONE,XF86MonBrightnessUp,spawn,noctalia msg brightness-up"
             "NONE,XF86MonBrightnessDown,spawn,noctalia msg brightness-down"
 
-            "ALT,h,focusdir,left"
-            "ALT,l,focusdir,right"
-            "ALT,k,focusdir,up"
-            "ALT,j,focusdir,down"
+            "SUPER,h,focusdir,left"
+            "SUPER,l,focusdir,right"
+            "SUPER,k,focusdir,up"
+            "SUPER,j,focusdir,down"
 
             "ALT+SHIFT,k,exchange_client,up"
             "ALT+SHIFT,j,exchange_client,down"

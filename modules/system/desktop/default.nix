@@ -4,7 +4,7 @@
   ...
 }: {
   flake.nixosModules.desktop = moduleWithSystem ({...}: let
-    modules = with self.nixosModules; [core mangowm sddm foot network noctalia hyprlock hypridle];
+    modules = with self.nixosModules; [core mangowm sddm foot network noctalia audio hyprlock hypridle];
   in {
     imports = modules;
 

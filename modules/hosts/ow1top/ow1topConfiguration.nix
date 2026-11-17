@@ -1,5 +1,9 @@
 {...}: {
-  flake.nixosModules.ow1topConfiguration = {pkgs, ...}: {
+  flake.nixosModules.ow1topConfiguration = {
+    pkgs,
+    unstablePkgs,
+    ...
+  }: {
     virtualisation.docker = {
       enable = true;
     };
@@ -7,8 +11,8 @@
       hostName = "Ow1Top";
     };
 
-    environment.systemPackages = with pkgs; [
-      spotify
+    environment.systemPackages = [
+      pkgs.spotify
     ];
   };
 }

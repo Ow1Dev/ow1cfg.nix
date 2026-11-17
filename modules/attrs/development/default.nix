@@ -13,6 +13,7 @@
     imports = modules;
     environment.systemPackages = with unstablePkgs; [
       devenv
+      herdr-desktop
     ];
   });
 }
