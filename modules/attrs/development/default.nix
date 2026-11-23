@@ -14,6 +14,7 @@
     environment.systemPackages = with unstablePkgs; [
       devenv
       herdr-desktop
+      gh
     ];
   });
 }

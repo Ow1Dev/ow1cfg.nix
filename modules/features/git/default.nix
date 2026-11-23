@@ -14,7 +14,7 @@
       inherit pkgs;
       settings = {
         user = {
-          email = "ow1@ow1.dev";
+          email = "31339803+Ow1Dev@users.noreply.github.com";
           name = "ow1dev";
         };
       };
